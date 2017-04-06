@@ -1,0 +1,23 @@
+def sentenceAnagramsEval(sentence0: Sentence, acc: List[Sentence]) :  List[Sentence] = {
+     // println(sentence0, sentence0.apply(0))
+      if (sentence0.apply(0) == "") {
+        val it3 = for (sentenc <- acc) yield (sentenc.mkString(" "))
+        println(acc)
+        it3 :: acc
+      }
+      else {
+        val it = for {combo <- (combinations(sentenceOccurrences(sentence0))); w <- dictionaryByOccurrences(combo)} 
+        yield (List((fixem(subtract(sentenceOccurrences(sentence0), wordOccurrences(w))), w)))
+        val it2 = for {combols <- it; ins <- combols} yield(sentenceAnagramsEval(List(ins._1),  List(ins._2) :: acc ).mkString(" "))
+        val it3 = for (sentenc <- acc) yield (sentenc.mkString(" "))
+        //println ()
+        if (it3.mkString("").length == (sentence.mkString("").filter { x => x.isLetter }).length) {
+          
+          //println(acc)
+          
+          //return acc
+        } 
+         
+        Nil
+      }
+    }
