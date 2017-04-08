@@ -42,7 +42,7 @@ body {
   padding: 24px;
 }
 
-.panel {
+/*.panel {
   margin-bottom: 6px;
 }
 
@@ -57,7 +57,7 @@ body {
   min-width: 200px;
   height: 36px;
   line-height: 36px;
-}
+}*/
 
 
 #add-member-button {
@@ -95,7 +95,7 @@ div.myClass [class*="col"] /* TWBS v3 */
 .row {
   margin-right: 0px;
   margin-left: 0px;
-  background-color: #eeeeee;
+  /*background-color*/
 }
 
 .blog-title-thumbnail {
