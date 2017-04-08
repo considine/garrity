@@ -5,6 +5,12 @@ body {
   padding: 15px;
   text-align: center;
 }
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 0px;
+    border-bottom: 1px solid #eee;
+}
+.lead {padding-top: 15px;}
 
 .center-text {
 	text-align: center;
@@ -269,3 +275,15 @@ div.myClass [class*="col"] /* TWBS v3 */
 	background-color: white;
 	cursor: pointer;
 }
+
+a {font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+    }
+a:focus, a:hover {
+    color: #2a2840;
+    text-decoration: underline;
+}
+
+.btni {background-color: #2a2840; border-color: #2a2840;}
