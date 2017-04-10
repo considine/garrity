@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,12 +10,18 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Your Newsletter</title>
+    <title>Your Articles</title>
 
+    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <script src="https://use.fontawesome.com/63edd0bcb2.js"></script>
+            <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script src="https://use.fontawesome.com/63edd0bcb2.js"></script>
 
   </head>
 
@@ -55,19 +62,36 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Newsletter - Admin Dash</h1>
-        <p class="lead">Use this page to submit a new TLDR post. <br> It will be emailed automatically, and archived if you leave the box checked </p>
+        <h1>Articles - Admin Dash</h1>
+        <p class="lead">Use this page to submit a new articles.
       </div>
       <div class="jumbotron">
-        <div class="container">
-          <div class="center-every"> <label for="post-title" class="center-text post-title-label"> Post Title </label>
-            <input style="padding-left: 5px;" id="post-title" type="text" hint="SDF">
-          </div>
-          <textarea rows="10" class="post-content"></textarea>
-          
-        </div>
-        <div class="center-every"> <input id="submit-post-button" type="image" src="assets/mailicon.svg" height="50" class="btn btn-success"> </input> <label class="checkbox-label" for="archive-box"> Post on Blog </label><input class="archive-box" type="checkbox" checked> </div>
-      </div>
+	      <div class="container">
+	        <div class="center-every"> <label for="post-title" class="center-text post-title-label"> Article Title </label>
+	        	<input style="padding-left: 5px;" id="post-title" type="text" hint="SDF">       </div>
+            <div class="clearfix">
+                <button type="button" class="btn btn-default pull-left">
+          Insert Picture <i class="fa fa-picture-o" aria-hidden="true"></i>
+         </button>
+         </div>
+	 
+         <i class="fa fa-bold" aria-hidden="true"></i>
+         <i class="fa fa-italic" aria-hidden="true"></i>
+         <i class="fa fa-underline" aria-hidden="true"></i>
+         <i class="fa fa-align-left" aria-hidden="true"></i>
+         <i class="fa fa-align-center" aria-hidden="true"></i>
+         <i class="fa fa-align-right" aria-hidden="true"></i>
+         <i class="fa fa-list" aria-hidden="true"></i>
+         <i class="fa fa-list-ol" aria-hidden="true"></i>
+
+
+	        <textarea rows="10" class="post-content"></textarea>
+	        
+
+        <button type="button" class="btn btn-success pull-left">Save Draft <i class="fa fa-file-archive-o" aria-hidden="true"></i></button>
+	              <button type="button" class="btn btn-success pull-left">Post <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                        </div>
+	    </div>
 
     </div>
 
