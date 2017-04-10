@@ -23,7 +23,7 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -38,18 +38,22 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
                     <li>
-                        <a href="#">HOME</a>
+                        <a href="article-home.html">HOME</a>
                     </li>
                     <li>
                         <a href="">FIGHT ANALYSIS</a>
                     </li>
+                    
                     <li>
-                        <a href="">ABOUT</a>
+                        <a href="allpost.html">STORIES</a>
                     </li>
-                    </ul>
+                                        <li>
+                        <a href="about.html">ABOUT</a>
+                    </li>
+                                        </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class='deg' href="inbox.html"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></a>
+                    <li class="deg" data-toggle="modal" data-target="#sub">
+                        <a class="deg" href="inbox.html" data-toggle="modal" data-target="#sub"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></a>
                     </li>
                     </ul>
             </div>
@@ -166,9 +170,19 @@
     </div>
 
   </div>  
-
-
-
+                    <footer>
+                <div class="col-sm-8 col-xs-12 text-left">
+                    <span class="copyright">Copyright &copy; <a href="www.k-op.com"><b>K-op Software</b></a></span>
+                </div>
+                <div class="col-sm-4 hidden-xs text-right">
+                    <ul class="list-inline quicklinks">
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+    </footer>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>

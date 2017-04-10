@@ -16,6 +16,17 @@
 .navbar-inverse .navbar-brand {
   color: white; }
 
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  display: table; }
+
+footer {
+  background-color: white;
+  display: table-row;
+  height: 0; }
+
 .navbar-inverse .navbar-nav > li > a:hover {
   color: gray !important; }
 
