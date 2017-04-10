@@ -31,7 +31,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">TLDR;</a>
+          <a class="deg navbar-brand" href="#">TLDR;</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -57,8 +57,13 @@
     <div class="container">
 
       <div class="starter-template">
+      <nav aria-label="...">
+  <ul class="pagination pagination-sm">
+    <li class="page-item"><a class="page-link linky" href="admin_blogs.html">Newsletters</a></li>
+    <li class="active page-item"><a class="page-link linky" href="admin_stories.html">Stories</a></li>
+  </ul>
+</nav>
         <h1>Recent Articles</h1>
-        <p class="lead">View recent and old articles
         <p>
         <a href="story.html"<button type="button" class="btn btn-success">Add New <i class="fa fa-plus" aria-hidden="true"></i></button></a></p>
         <div class="container">
@@ -87,26 +92,26 @@
                            <th>Published?</th>
                         </tr>
                         <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
-                           <td class="align-left" style="text-align: left;"><a href="#">Article 4</a><p><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
+                           <td class="align-left" style="text-align: left;"><a href="#">Article 4</a><p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
                            <td class="align-left" style="text-align: left;"><a href="#">Diet</a></td>
                            <td class="align-left" style="text-align: left;"><a href="#">17</a></td>
                            <td class="align-left" style="text-align: left; text-decoration: none;">June 15, 2017</td>
                            <td><input class="archive-box align-left" type="checkbox"> </div></td>
                         </tr>
                         <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
-                           <td class="align-left" style="text-align: left;"><a href="#">Article 3</a><p><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
+                           <td class="align-left" style="text-align: left;"><a href="#">Article 3</a><p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
                            <td class="align-left" style="text-align: left;"><a href="#">Workout</a></td>
                            <td class="align-left" style="text-align: left;"><a href="#">23</a></td>
                            <td class="align-left" style="text-align: left; text-decoration: none;">May 05, 2017</td>
                            <td><input class="archive-box align-left" type="checkbox" checked> </div></td>
                         </tr>                        <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
-                           <td class="align-left" style="text-align: left;"><a href="#">Article 2</a><p><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
+                           <td class="align-left" style="text-align: left;"><a href="#">Article 2</a><p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
                            <td class="align-left" style="text-align: left;"><a href="#">Analysis</a></td>
                            <td class="align-left" style="text-align: left;"><a href="#">8</a></td>
                            <td class="align-left" style="text-align: left; text-decoration: none;">February 24, 2017</td>
                            <td><input class="archive-box align-left" type="checkbox" checked> </div></td>
                         </tr>                        <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
-                           <td class="align-left" style="text-align: left;"><a href="#">Article 1</a><p><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
+                           <td class="align-left" style="text-align: left;"><a href="#">Article 1</a><p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
                            <td class="align-left" style="text-align: left;"><a href="#">Workout</a></td>
                            <td class="align-left" style="text-align: left;"><a href="#">9</a></td>
                            <td class="align-left" style="text-align: left; text-decoration: none;">January 03, 2017</td>
@@ -114,7 +119,7 @@
                         </tr>
                      </table>
                   </div>
-              
+                                  </div>
 
 
 
@@ -129,7 +134,7 @@
 
                     </div>
       </div>
-                    </div>
+
 
 
 <!--     <footer>

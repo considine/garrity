@@ -1,8 +1,45 @@
 .deg {
   color: white; }
 
+.deg:hover {
+  color: lightgray; }
+
+.boldita {
+  margin-top: 10px;
+  background-color: none;
+  cursor: pointer;
+  margin-left: 1px; }
+
+.navbar-inverse .navbar-nav > li > a {
+  color: white !important; }
+
+.navbar-inverse .navbar-brand {
+  color: white; }
+
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: gray !important; }
+
+.navbar-inverse .navbar-brand {
+  color: gray !important; }
+
+.hoveringy {
+  margin: 2px 5px 0px 0px; }
+
+.hovering {
+  margin: 2px 5px 0px 0px; }
+
+.hovering:hover {
+  background-color: white;
+  color: gray; }
+
 .navbar {
   background-color: #2a2840; }
+
+.pagination {
+  margin-bottom: 5px !important; }
+
+.linky {
+  width: 100px; }
 
 body {
   padding-top: 40px; }
@@ -92,8 +129,7 @@ div.myClass [class*="col"] {
 
 .row {
   margin-right: 0px;
-  margin-left: 0px;
-  background-color: #eeeeee; }
+  margin-left: 0px; }
 
 .blog-title-thumbnail {
   padding: 5px;
