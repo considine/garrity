@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-
+    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
     <title>Your Articles</title>
 
     <!-- Bootstrap core CSS -->
@@ -65,34 +65,10 @@
         <h1>Articles - Admin Dash</h1>
         <p class="lead">Use this page to submit a new articles.
       </div>
-      <div class="jumbotron">
-	      <div class="container">
-	        <div class="center-every"> <label for="post-title" class="center-text post-title-label"> Article Title </label>
-	        	<input style="padding-left: 5px;" id="post-title" type="text" hint="SDF">       </div>
-            <div class="clearfix">
-                <button type="button" class="btn btn-default pull-left">
-          Insert Picture <i class="fa fa-picture-o" aria-hidden="true"></i>
-         </button>
-         </div>
-         <div class=boldita>
-	       <imput class="hovering"><i class="fa fa-bold" aria-hidden="true"></i></imput>
-         <imput class="hovering"><i class="fa fa-italic" aria-hidden="true"></i></imput>
-         <imput class="hovering"><i class="fa fa-underline" aria-hidden="true"></i></imput>
-         <imput class="hovering"><i class="fa fa-align-left" aria-hidden="true"></i></imput>
-         <imput class="hovering"><i class="fa fa-align-center" aria-hidden="true"></i></imput>
-         <imput class="hovering"><i class="fa fa-align-right" aria-hidden="true"></i></imput>
-         <imput class="hovering"><i class="fa fa-list" aria-hidden="true"></i></imput>
-         <imput class="hovering"><i class="fa fa-list-ol" aria-hidden="true"></i></imput>
-         </div>
-
-
-	        <textarea rows="10" class="post-content"></textarea>
-	        
-
-        <button type="button" class="btn btn-success hoveringy pull-left">Save Draft <i class="fa fa-file-archive-o" aria-hidden="true"></i></button>
-	              <button type="button" class="btn btn-success hoveringy pull-left">Post <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                        </div>
-	    </div>
+      <div class="jumbotron" style="background-color: white;">
+	      <div id="editor">
+ 
+      </div>
 
     </div>
 
@@ -104,6 +80,36 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+var toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  ['blockquote', 'code-block'],
+
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+  [{ 'direction': 'rtl' }],                         // text direction
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']                                         // remove formatting button
+];
+
+  var editor = new Quill('#editor', {
+    modules: { toolbar: toolbarOptions },
+    theme: 'snow'
+  });
+</script>
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     
   </body>

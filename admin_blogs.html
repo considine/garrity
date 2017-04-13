@@ -1,163 +1,154 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>Recent Blogs</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/starter-template.css" rel="stylesheet">
-            <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <script src="https://use.fontawesome.com/63edd0bcb2.js"></script>
-
-  </head>
-
-  <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">TLDR;</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-          </ul>
-                    <form class="navbar-form navbar-right">
-            
-            <a class="deg" href="index.html"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></a>
-          </form>
-          <form class="navbar-form navbar-right">
-            
-            <a class="deg" href="members.html"><i class="fa fa-users fa-2x" aria-hidden="true"></i></a>
-          </form>
-                    <form class="navbar-form navbar-right">
-            
-            <a class="deg" href="#"><i class="fa fa-key fa-2x" aria-hidden="true"></i></a>
-          </form>
-        </div><!--/.nav-collapse -->
-
-          
-      </div>
-    </nav>
-
-    <div class="container">
-
-      <div class="starter-template">
-      <nav aria-label="...">
-  <ul class="pagination pagination-sm">
-    <li class="active page-item"><a class="page-link linky" href="admin_blogs.html">Newsletters</a></li>
-    <li class="page-item"><a class="page-link linky" href="admin_stories.html">Stories</a></li>
-  </ul>
-</nav>
-        <h1>Recent Blogs</h1>
-        <p>
-        <a href="index.html"<button type="button" class="btn btn-success">Add New <i class="fa fa-plus" aria-hidden="true"></i></button></a></p>
-        <div class="container">
-
-                <div class="row">
-                  <div class="well">
-                                    <p class="text-left">Search old blog posts</p>
-                    <form class="form" role="search">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search" name="q">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                            </div>
-                        </div>
-                        </form>
-                        </div>
-
-            <!-- Blog Post Content Column -->
-<div class="pagination-centered">
-                     <table class="table table-striped table-hover" >
-                        <tr>
-                           <th>Title</th>
-                           <th>Category</th>
-                           <th>Comments</i></th>
-                           <th>Date</th>
-                        </tr>
-                        <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
-                           <td class="align-left" style="text-align: left;"><a href="#">Blog 4</a><p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
-                           <td class="align-left" style="text-align: left;"><a href="#">Diet</a></td>
-                           <td class="align-left" style="text-align: left;"><a href="#">17</a></td>
-                           <td class="align-left" style="text-align: left; text-decoration: none;">June 15, 2017</td>
-                        </tr>
-                        <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
-                           <td class="align-left" style="text-align: left;"><a href="#">Blog 3</a><p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
-                           <td class="align-left" style="text-align: left;"><a href="#">Workout</a></td>
-                           <td class="align-left" style="text-align: left;"><a href="#">23</a></td>
-                           <td class="align-left" style="text-align: left; text-decoration: none;">May 05, 2017</td>
-                        </tr>                        <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
-                           <td class="align-left" style="text-align: left;"><a href="#">Blog 2</a><p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
-                           <td class="align-left" style="text-align: left;"><a href="#">Analysis</a></td>
-                           <td class="align-left" style="text-align: left;"><a href="#">8</a></td>
-                           <td class="align-left" style="text-align: left; text-decoration: none;">February 24, 2017</td>
-                        </tr>                        <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
-                           <td class="align-left" style="text-align: left;"><a href="#">Blog 1</a><p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a></td>
-                           <td class="align-left" style="text-align: left;"><a href="#">Workout</a></td>
-                           <td class="align-left" style="text-align: left;"><a href="#">9</a></td>
-                           <td class="align-left" style="text-align: left; text-decoration: none;">January 03, 2017</td>
-                        </tr>
-                     </table>
-                  </div>
-              
-                    </div>
-
-
-
-                                    <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr;</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">&rarr;</a>
-                    </li>
-                </ul>
-
-                    </div>
-      </div>
-
-
-<!--     <footer>
-      <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; <a href="www.k-op.com"><b>K-op Software</b></a></span>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li><a href="#">Privacy Policy</a>
-                        </li>
-                        <li><a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="../../favicon.ico">
+      <title>Recent #{contentType}</title>
+      <!-- Bootstrap core CSS -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/starter-template.css" rel="stylesheet">
+      <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <script src="https://use.fontawesome.com/63edd0bcb2.js"></script>
+   </head>
+   <body>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+         <div class="container">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="#">TLDR;</a>
             </div>
-        </div>
-    </footer> --><!-- /.container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    
-  </body>
+            <div id="navbar" class="collapse navbar-collapse">
+               <ul class="nav navbar-nav">
+               </ul>
+               <form class="navbar-form navbar-right">
+                  <a class="deg" href="index.html"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></a>
+               </form>
+               <form class="navbar-form navbar-right">
+                  <a class="deg" href="members.html"><i class="fa fa-users fa-2x" aria-hidden="true"></i></a>
+               </form>
+               <form class="navbar-form navbar-right">
+                  <a class="deg" href="#"><i class="fa fa-key fa-2x" aria-hidden="true"></i></a>
+               </form>
+            </div>
+            <!--/.nav-collapse -->
+         </div>
+      </nav>
+      <div class="container">
+      <div class="starter-template">
+         <nav aria-label="...">
+            <ul class="pagination pagination-sm">
+               <li class="active page-item"><a class="page-link linky" href="admin_blogs.html">Newsletters</a></li>
+               <li class="page-item"><a class="page-link linky" href="admin_stories.html">Stories</a></li>
+            </ul>
+         </nav>
+         <h1>Recent Blogs</h1>
+         <p>
+            <a href="index.html"><button type="button" class="btn btn-success">Add New <i class="fa fa-plus" aria-hidden="true"></i></button></a>
+         </p>
+         <div class="container">
+            <div class="row">
+               <div class="well">
+                  <p class="text-left">Search old blog posts</p>
+                  <form class="form" role="search">
+                     <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q">
+                        <div class="input-group-btn">
+                           <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+               <!-- Blog Post Content Column -->
+               <div class="pagination-centered">
+                  <table class="table table-striped table-hover" >
+                     <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Comments</i></th>
+                        <th>Date</th>
+                     </tr>
+                     <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
+                        <td class="align-left" style="text-align: left;">
+                           <a href="#">Blog 4</a>
+                           <p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a>
+                        </td>
+                        <td class="align-left" style="text-align: left;"><a href="#">Diet</a></td>
+                        <td class="align-left" style="text-align: left;"><a href="#">17</a></td>
+                        <td class="align-left" style="text-align: left; text-decoration: none;">June 15, 2017</td>
+                     </tr>
+                     <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
+                        <td class="align-left" style="text-align: left;">
+                           <a href="#">Blog 3</a>
+                           <p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a>
+                        </td>
+                        <td class="align-left" style="text-align: left;"><a href="#">Workout</a></td>
+                        <td class="align-left" style="text-align: left;"><a href="#">23</a></td>
+                        <td class="align-left" style="text-align: left; text-decoration: none;">May 05, 2017</td>
+                     </tr>
+                     <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
+                        <td class="align-left" style="text-align: left;">
+                           <a href="#">Blog 2</a>
+                           <p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a>
+                        </td>
+                        <td class="align-left" style="text-align: left;"><a href="#">Analysis</a></td>
+                        <td class="align-left" style="text-align: left;"><a href="#">8</a></td>
+                        <td class="align-left" style="text-align: left; text-decoration: none;">February 24, 2017</td>
+                     </tr>
+                     <tr on-finish-render="ngRepeatFinished" ng-class="{'open-group' : groups[$index]['open']==1}" ng-repeat="i in groups track by $index">
+                        <td class="align-left" style="text-align: left;">
+                           <a href="#">Blog 1</a>
+                           <p><a style="color: blue;" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit </a><a style="color: #ff3b2d;" href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete </a>
+                        </td>
+                        <td class="align-left" style="text-align: left;"><a href="#">Workout</a></td>
+                        <td class="align-left" style="text-align: left;"><a href="#">9</a></td>
+                        <td class="align-left" style="text-align: left; text-decoration: none;">January 03, 2017</td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+            <ul class="pager">
+               <li class="previous">
+                  <a href="#">&larr;</a>
+               </li>
+               <li class="next">
+                  <a href="#">&rarr;</a>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <!--     <footer>
+         <div class="container">
+               <div class="row">
+                   <div class="col-md-4">
+                       <span class="copyright">Copyright &copy; <a href="www.k-op.com"><b>K-op Software</b></a></span>
+                   </div>
+                   <div class="col-md-4">
+                       <ul class="list-inline quicklinks">
+                           <li><a href="#">Privacy Policy</a>
+                           </li>
+                           <li><a href="#">Terms of Use</a>
+                           </li>
+                       </ul>
+                   </div>
+               </div>
+           </div>
+         </footer> --><!-- /.container -->
+      <!-- Bootstrap core JavaScript
+         ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+      <script src="js/bootstrap.min.js"></script>
+      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+   </body>
 </html>

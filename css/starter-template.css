@@ -4,7 +4,6 @@
 .deg:hover {
   color: lightgray; }
 
-
 .boldita {
   margin-top: 10px;
   background-color: none;
@@ -16,6 +15,9 @@
 
 .navbar-inverse .navbar-brand {
   color: white; }
+
+.story-1-wrapper.content-holder {
+  height: 100%; }
 
 html, body {
   height: 100%;
@@ -96,9 +98,8 @@ body {
 .checkbox-label {
   margin-right: 8px; }
 
-/*.panels {
-  padding: 24px;
-}*/
+.panels {
+  padding: 24px; }
 
 .panel {
   margin-bottom: 6px; }

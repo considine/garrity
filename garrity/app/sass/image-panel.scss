@@ -1,0 +1,163 @@
+.image-holder {
+	
+	cursor: pointer; margin-left: auto; margin-right: auto;  overflow: hidden;border: 5px solid black; 
+	 background-repeat: no-repeat; 
+   background-size: length;
+}
+
+.image-holder-wrapper {
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+  margin-bottom: 16px;
+
+
+}
+.post-image-configuration p {
+  max-width: 600px;
+  margin-bottom: 32px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-form {
+  text-align: center;
+}
+
+.file-upload-input {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-src {
+	
+	position: relative;
+
+}
+
+
+
+
+//IMAGES 
+.myContainer {
+  .image-holder {
+    margin-left: auto;
+    margin-right: auto;
+ 
+  }
+  .image-holder-wrapper {
+    display: none;
+  }
+  
+  .image-holder-wrapper-main-lg {
+    display: block;
+    .image-holder {
+      width: 551px;
+      height: 496px;
+     
+      
+    }
+  }
+  .image-holder-wrapper-main-md{
+    .image-holder {
+    width: 551px;
+    height: 396px;
+    }
+  }
+
+  .image-holder-wrapper-main-sm{
+    .image-holder {
+    width: 470px;
+    height: 296px;
+    }
+  }
+  .image-holder-wrapper-main-xs {
+      .image-holder {
+      width: 741px;
+      height: 196px;
+    }
+
+  }
+  .image-holder-wrapper-scnd-lg{
+ .image-holder {
+      width: 555px;
+      height: 250px;
+    }
+  }
+  .image-holder-wrapper-scnd-md {
+     .image-holder {
+      width: 555px;
+      height: 200px;
+    }
+  }
+  .image-holder-wrapper-scnd-sm {
+     .image-holder {
+      width: 495px;
+      height: 150px;
+    }
+  }
+  .image-holder-wrapper-scnd-xs {
+     .image-holder {
+      width: 382px;
+      height: 200px;
+    }
+  }
+  .image-holder-wrapper-thrd-xs {
+     .image-holder {
+      width: 145px;
+      height: 115px;
+    }
+  }
+}
+
+
+#step2 {
+	/*display: none;*/
+}
+
+body {
+  padding: 0px;
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.step-header {
+  text-align: center;
+}
+
+.image-holder {
+  // width: 500px;
+  // height: 500px;
+}
+
+
+
+.submitImage {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+}
+/*@media (max-width: 768px) {
+    .image-holder {
+       width: 300px;
+      height: 300px; } }
+  @media (min-width: 768px) {
+       .image-holder {
+      width: 400px;
+      height: 400px; } }
+  @media (min-width: 970px) {
+       .image-holder {
+       width: 500px;
+      height: 500px;  } }
+  @media (min-width: 1170px) {
+       .image-holder {
+      width: 600px;
+      height: 600px;  } }*/

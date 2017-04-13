@@ -4,31 +4,92 @@ block content
   div#step2
     div(style="text-align: center;")
       h3 Screen Size
-      h5 Set the position for each screen size. This is how the image will appear in your article
+      div.post-image-configuration
+        p Adjust the image position and zoom for each container. These represents all of the picture displays that this image may use, and we want to make sure we format it properly for you
       nav(aria-lavel="...")
-        ul.pagination
-          li#xsli.screen-size-indic
-            a(href="#") XS 
-              span.sr-only (current)
-          li#smli.screen-size-indic
-            a(href="#") SM 
-              span.sr-only (current)
-          li#mdli.screen-size-indic
-            a(href="#") MD 
-              span.sr-only (current)
-          li#lgli.active.screen-size-indic
-            a(href="#") LG
-              span.sr-only (current)
     div.myContainer
-      div.image-holder-wrapper
-        div.image-holder#image-holder(style="background-image: url('/images/#{imgsrc}');")
-    div#arrows
-      nav(aria-lavel="...")
+      div.image-holder-wrapper.image-holder-wrapper-main-lg
+        h3.image-header Main article, Full Size Screen
+        div.image-holder#main-lg(style="background-image: url('/images/#{imgsrc}');")
         ul.pager
-          li#zoom-in-button(style="cursor: pointer;")
+          li.zoom-in-button(style="cursor: pointer;")
             a -
-          li#zoom-out-button(style="cursor: pointer;")
+          li.zoom-out-button(style="cursor: pointer;")
             a +
-    div.submitImage
-      button.submitImageButton.btn.btn-default Go!
+      
+      div.image-holder-wrapper.image-holder-wrapper-main-md
+        h3.image-header Main article, Medium Size Screen
+        div.image-holder#main-md(style="background-image: url('/images/#{imgsrc}');")
+        ul.pager
+          li.zoom-in-button(style="cursor: pointer;")
+            a -
+          li.zoom-out-button(style="cursor: pointer;")
+            a +
+      div.image-holder-wrapper.image-holder-wrapper-main-sm
+        h3.image-header Main article, Small Size Screen
+        div.image-holder#main-sm(style="background-image: url('/images/#{imgsrc}');")
+        ul.pager
+          li.zoom-in-button(style="cursor: pointer;")
+            a -
+          li.zoom-out-button(style="cursor: pointer;")
+            a +
+      div.image-holder-wrapper.image-holder-wrapper-main-xs
+        h3.image-header Main article, Small Size Screen
+        div.image-holder#main-xs(style="background-image: url('/images/#{imgsrc}');")
+        ul.pager
+          li.zoom-in-button(style="cursor: pointer;")
+            a -
+          li.zoom-out-button(style="cursor: pointer;")
+            a +
+      div.image-holder-wrapper.image-holder-wrapper-scnd-lg
+        h3.image-header Secondary article, Full Size Screen
+        div.image-holder#scnd-lg(style="background-image: url('/images/#{imgsrc}');")
+        ul.pager
+          li.zoom-in-button(style="cursor: pointer;")
+            a -
+          li.zoom-out-button(style="cursor: pointer;")
+            a +
+      div.image-holder-wrapper.image-holder-wrapper-scnd-md
+        h3.image-header Secondary article, Medium Size Screen
+        div.image-holder#scnd-md(style="background-image: url('/images/#{imgsrc}');")
+        ul.pager
+          li.zoom-in-button(style="cursor: pointer;")
+            a -
+          li.zoom-out-button(style="cursor: pointer;")
+            a +
+      div.image-holder-wrapper.image-holder-wrapper-scnd-sm
+        h3.image-header Secondary article, Small Size Screen
+        div.image-holder#scnd-sm(style="background-image: url('/images/#{imgsrc}');")
+        ul.pager
+          li.zoom-in-button(style="cursor: pointer;")
+            a -
+          li.zoom-out-button(style="cursor: pointer;")
+            a +
+      div.image-holder-wrapper.image-holder-wrapper-scnd-xs
+        h3.image-header Secondary article, Mobile Size Screen
+        div.image-holder#scnd-xs(style="background-image: url('/images/#{imgsrc}');")
+        ul.pager
+          li.zoom-in-button(style="cursor: pointer;")
+            a -
+          li.zoom-out-button(style="cursor: pointer;")
+            a +
+      div.image-holder-wrapper.image-holder-wrapper-third-xs
+        h3.image-header Secondary article, Mobile Size Screen
+        div.image-holder#thrd-xs(style="background-image: url('/images/#{imgsrc}');")
+        ul.pager
+          li.zoom-in-button(style="cursor: pointer;")
+            a -
+          li.zoom-out-button(style="cursor: pointer;")
+            a +
+      div(style="text-align: center;")
+        button.btn.btn-default#next-image Done
+      div(style="text-align: center;")
+        button.btn.btn-default#center-x Test
+
+
+
+    //- div.myContainer
+    //-   div.image-holder-wrapper
+    //-     div.image-holder#image-holder(style="background-image: url('/images/#{imgsrc}');")
+    
     

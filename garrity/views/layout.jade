@@ -3,14 +3,16 @@ html
  head
   title= title
   link(rel='stylesheet', href='/stylesheets/style.css')
-  link(rel='stylesheet', href='/stylesheets/image-panel.css')
   link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+  link(rel='stylesheet', href='/stylesheets/image-panel.css')
+  link(rel='stylesheet', href='/stylesheets/starter-template.css')
+  script(src="https://use.fontawesome.com/63edd0bcb2.js")
  body
   nav.navbar.navbar-inverse.navbar-fixed-top
    div.container
     div.navbar-header
      button.navbar-toggle.collapsed(type="button" data-target="#navbar" aria-controls="navbar")
-      span.src-only toggle navigation
+      span.src-only 
       span.icon-bar
       span.icon-bar
       span.icon-bar
@@ -35,4 +37,5 @@ html
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
   script(src="/javascripts/bootstrap.min.js")
   script(src="/javascripts/image-render.js")
+  script(src="/javascripts/resizer.js")
 

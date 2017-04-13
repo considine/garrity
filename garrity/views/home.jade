@@ -1,0 +1,124 @@
+extends layout
+
+block content
+  style.
+    @media (max-width: 768px) {
+      #{xsStyle}
+    }
+    @media (min-width: 768px) {
+      #{smStyle}
+    }
+    @media (min-width: 992px) {
+      #{mdStyle}
+    }
+    @media (min-width: 1200px) {
+      #{lgStyle}
+    }
+   
+  .content-wrapper
+    .row.myClass
+      .thumbnail-col.col-sm-2.col-xs-3(style='height: 40px;')
+         .new.center-every
+            div
+             img.new(src='images/test6.jpeg')
+       
+            div
+              h3.blog-title-thumbnail.center-text  3/27/2017 
+      .thumbnail-col.col-sm-2.col-xs-3(style='height: 40px;')
+        .new.center-every
+          div
+            img.new(src='images/test2.jpeg')
+            
+          div
+            h3.blog-title-thumbnail.center-text  3/20/2017 
+      .thumbnail-col.col-sm-2.col-xs-3(style='height: 40px;')
+        .new.center-every
+          div
+            img.new(src='images/test3.jpg')
+            
+          div
+            h3.blog-title-thumbnail.center-text  3/13/2017 
+      .thumbnail-col.col-sm-push-4.col-sm-2.col-xs-3(style='height: 40px;')
+        .new.center-every
+          div
+            img.new(src='images/moreblogposts.jpg')      
+          div
+            h3.blog-title-thumbnail.center-text  3/6/2017
+      .thumbnail-col.col-sm-pull-2.col-sm-2.col-xs-3(style='height: 40px;')
+        .new.center-every
+          div
+            img.new(src='images/test5.jpeg')       
+          div
+            h3.blog-title-thumbnail.center-text  2/28/2017 
+      .thumbnail-col.col-sm-pull-2.col-sm-2.col-xs-3(style='height: 40px;')
+        .new.center-every
+          div
+            img.new(src='images/test4.jpeg')     
+          div
+            h3.blog-title-thumbnail.center-text  TLDR; 
+    
+    .row.content-wrapper
+      .col-sm-6.col-xs-12.story-1-wrapper.content-holder
+        .main-content-thumbnail.story-1(style="background-image: url('#{mainimg}');")
+          h1.content-header  Main Story    
+      .col-sm-6.col-xs-12.nested-content-holder(style='background-color: purple; height: 100%;')
+        .row.nested-content-row
+          .col-sm-12.col-xs-6.nested-content-col.main-content-2.content-holder(style="background-image: url('#{secondimg1}')")
+            h3.content-header  Secondary Story 
+               
+          .col-sm-12.col-xs-6.nested-content-col.main-content-3.content-holder(style="background-image: url('#{secondimg2}')")
+            h3.content-header  Secondary Story 
+    .secondary-content-header
+      h2 OTHER CONTENT
+    .row.bottom-content
+      .secondary-posts.col-sm-8(style="padding: 0;  padding-right: 16px;")
+        .content-post.row(style="background-color: white; padding: 12px")
+          .col-sm-3.col-xs-0
+            img(style="width: 100%; max-width: 300px", src="images/test4.jpeg")
+          .col-sm-9.col-xs-12
+            h3.post-header(style="margin-top: 8px; margin-bottom: 8px;") Everything you need to know about the Final Four
+            p.post-credentials(style="font-style: italic;") By Mike Rutheford March 28, 2017, 12:00pm EDT
+            p.post-hint The three types of tight ends as defined by Bill O'Brien and the Texans : Y, F, U.
+        .content-post.row(style="background-color: white; padding: 12px")
+          .col-sm-3.col-xs-0
+            img(style="width: 100%; max-width: 300px", src="images/test4.jpeg")
+          .col-sm-9.col-xs-12
+            h3.post-header(style="margin-top: 8px; margin-bottom: 8px;") Everything you need to know about the Final Four
+            p.post-credentials(style="font-style: italic;") By Mike Rutheford March 28, 2017, 12:00pm EDT
+            p.post-hint The three types of tight ends as defined by Bill O'Brien and the Texans : Y, F, U.
+      .secondary-posts.col-sm-4(style="padding-top: 16px; padding-left: 16px; text-align: center; background-color: white")
+        .panel.panel-primary(style="max-width: 300px; margin-left: auto; margin-right: auto;")
+          .panel-heading
+            h3.panel-title Upcoming Fights
+          ul.list-group
+            li.list-group-item Cras Justo Odio
+            li.list-group-item Cras Justo Odio
+            li.list-group-item Cras Justo Odio
+            li.list-group-item Cras Justo Odio
+            li.list-group-item Cras Justo Odio
+    .secondary-content-header.col-xs-0
+      h2.col-xs-0 WATCH 
+    .row.video-gallery
+      .col-sm-3.col-xs-0.video-holder
+        img(style="width: 100%;", src="https://img.youtube.com/vi/JeozbHfX_tw/0.jpg")
+      .col-sm-3.col-xs-0.video-holder
+        img(style="width: 100%;", src="https://img.youtube.com/vi/onai-Fw5RZY/0.jpg")
+      .col-sm-3.col-xs-0.video-holder
+        img(style="width: 100%;", src="https://img.youtube.com/vi/mPtux9fl_mg/0.jpg")
+      .col-sm-3.col-xs-0.video-holder
+        img(style="width: 100%;", src="https://img.youtube.com/vi/JeozbHfX_tw/0.jpg")
+  footer
+    .col-sm-8.col-xs-12.text-left
+      span.copyright Copyright &copy; 
+        a(href="www.k-op.com")
+          b K-op Software
+    .col-sm-4.hidden-xs.text-right
+      ul.list-inline.quicklinks
+        li
+          a(href="#") Privacy Policy
+        li
+          a(href="#") Terms of Use
+
+
+
+
