@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,19 +9,21 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
+    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+    <title>Your Articles</title>
 
-    <title>Your Newsletter</title>
-
+    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+
     <link href="css/starter-template.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <script src="https://use.fontawesome.com/63edd0bcb2.js"></script>
+            <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script src="https://use.fontawesome.com/63edd0bcb2.js"></script>
 
   </head>
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+   <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -29,14 +32,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">TLDR;</a>
+          <a class="navbar-brand" href="article-home.html">Home</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
           </ul>
                     <form class="navbar-form navbar-right">
             
-            <a class="deg" href="index.html"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></a>
+            <a class="deg" href="admin_blogs.html"><i class="fa fa-tachometer fa-2x" aria-hidden="true"></i></a>
           </form>
           <form class="navbar-form navbar-right">
             
@@ -44,31 +47,36 @@
           </form>
                     <form class="navbar-form navbar-right">
             
-            <a class="deg" href="#"><i class="fa fa-key fa-2x" aria-hidden="true"></i></a>
+            <a class="deg" href="login.html"><i class="fa fa-key fa-2x" aria-hidden="true"></i></a>
           </form>
         </div><!--/.nav-collapse -->
 
           
       </div>
     </nav>
-
-    <div class="container">
-
-      <div class="starter-template">
-        <h1>Newsletter - Admin Dash</h1>
-        <p class="lead">Use this page to submit a new TLDR post. <br> It will be emailed automatically, and archived if you leave the box checked </p>
-      </div>
-      <div class="jumbotron">
         <div class="container">
-          <div class="center-every"> <label for="post-title" class="center-text post-title-label"> Post Title </label>
-            <input style="padding-left: 5px;" id="post-title" type="text" hint="SDF">
+      <a href="admin_blogs.html"><div class="pull-right closebtn">Close <i class="fa fa-times fa-2x" aria-hidden="true"></i></div></a>
+      </div>
+    <div class="container">
+      <div class="starter-template">              
+        <h1 class="text-center">Newsletter - Admin Dash</h1>
+        <p class="lead">Use this page to submit a new newsletter. <br> It will be emailed automatically, and archived if you leave the box checked </p>
+      </div>
+          <div class="center-every"> <label for="post-title" class="center-text post-title-label"> Email Subject </label>
+            <input style="padding-left: 5px;" id="post-title" type="text" hint="SDF">       
           </div>
-          <textarea rows="10" class="post-content"></textarea>
-          
-        </div>
-        <div class="center-every"> <input id="submit-post-button" type="image" src="assets/mailicon.svg" height="50" class="btn btn-success"> </input> <label class="checkbox-label" for="archive-box"> Post on Blog </label><input class="archive-box" type="checkbox" checked> </div>
+                      <div class="clearfix">
+                <button type="button" class="pictureins btn btn-default pull-left">
+          Insert Picture <i class="fa fa-picture-o" aria-hidden="true"></i>
+         </button>
+         </div>
+      <div class="" style="background-color: white;">
+        <div id="editor">
+ 
       </div>
 
+
+        <div class="pull-left hoveringy"> <input id="submit-post-button" type="image" src="assets/mailicon.svg" height="50" class="btn btn-success"> </input> <label class="checkbox-label" for="archive-box"> Post on Blog </label><input class="archive-box" type="checkbox" checked> </div>
     </div>
 
 
@@ -79,7 +87,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+var toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  ['blockquote', 'code-block'],
+
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+  [{ 'direction': 'rtl' }],                         // text direction
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']                                         // remove formatting button
+];
+
+  var editor = new Quill('#editor', {
+    modules: { toolbar: toolbarOptions },
+    theme: 'snow'
+  });
+</script>
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     
   </body>
 </html>
+
+
