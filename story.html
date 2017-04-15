@@ -21,10 +21,6 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
-
-    <!-- Custom styles for this template -->
     <link href="css/starter-template.css" rel="stylesheet">
             <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <script src="https://use.fontawesome.com/63edd0bcb2.js"></script>
@@ -33,7 +29,7 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+   <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -42,14 +38,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">TLDR;</a>
+          <a class="navbar-brand" href="article-home.html">Home</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
           </ul>
                     <form class="navbar-form navbar-right">
             
-            <a class="deg" href="index.html"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></a>
+            <a class="deg" href="admin_blogs.html"><i class="fa fa-tachometer fa-2x" aria-hidden="true"></i></a>
           </form>
           <form class="navbar-form navbar-right">
             
@@ -57,26 +53,39 @@
           </form>
                     <form class="navbar-form navbar-right">
             
-            <a class="deg" href="#"><i class="fa fa-key fa-2x" aria-hidden="true"></i></a>
+            <a class="deg" href="login.html"><i class="fa fa-key fa-2x" aria-hidden="true"></i></a>
           </form>
         </div><!--/.nav-collapse -->
 
           
       </div>
     </nav>
+            <div class="container">
+      <a href="admin_stories.html"><div class="pull-right closebtn">Close <i class="fa fa-times fa-2x" aria-hidden="true"></i></div></a>
+      </div>
 
     <div class="container">
 
       <div class="starter-template">
         <h1>Articles - Admin Dash</h1>
+        <p class="lead">Use this page to submit a new article.
         <button onclick="go()" class="btn btn-default"> Test </button>
         <p class="lead">Use this page to submit a new articles.
       </div>
-      <div style="background-color: white; min-width: 500px; width: 65%; max-width: 750px; margin-left: auto; margin-right: auto;">
+          <div class="center-every"> <label for="post-title" class="center-text post-title-label"> Article Title </label>
+            <input style="padding-left: 5px;" id="post-title" type="text" hint="SDF">       
+          </div>
+            <div class="clearfix">
+                <button type="button" class="pictureins btn btn-default pull-left">
+          Insert Picture <i class="fa fa-picture-o" aria-hidden="true"></i>
+         </button>
+         </div>
+      <div class="" style="background-color: white;">
 	      <div id="editor">
  
-        </div>
-        <div id="log">
+      </div>
+      <button type="button" class="btn btn-success hoveringy pull-left">Save Draft <i class="fa fa-file-archive-o" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-success hoveringy pull-left">Post <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 
         </div>
 
