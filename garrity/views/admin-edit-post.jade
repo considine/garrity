@@ -1,89 +1,24 @@
-doctype html
-html(lang='en')
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-    meta(name='description', content='')
-    meta(name='author', content='')
-    link(rel='icon', href='../../favicon.ico')
-    title Your Articles
-    // Bootstrap core CSS
-    link(href='stylesheets/bootstrap.min.css', rel='stylesheet')
-    // IE10 viewport hack for Surface/desktop Windows 8 bug
-    // <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    // Custom styles for this template
-    link(href='stylesheets/starter-template.css', rel='stylesheet')
-    link(href='font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
-    script(src='https://use.fontawesome.com/63edd0bcb2.js')
-  body
-    nav.navbar.navbar-inverse.navbar-fixed-top
-      .container
-        .navbar-header
-          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href='#') TLDR;
-        #navbar.collapse.navbar-collapse
-          ul.nav.navbar-nav
-          form.navbar-form.navbar-right
-            a.deg(href='index.html')
-              i.fa.fa-cog.fa-2x(aria-hidden='true')
-          form.navbar-form.navbar-right
-            a.deg(href='members.html')
-              i.fa.fa-users.fa-2x(aria-hidden='true')
-          form.navbar-form.navbar-right
-            a.deg(href='#')
-              i.fa.fa-key.fa-2x(aria-hidden='true')
-        // /.nav-collapse
-    .container
-      .starter-template
-        h1 Articles - Admin Dash
-        p.lead
-          | Use this page to submit a new articles.
-      .jumbotron
-        .container
-          .center-every
-            label.center-text.post-title-label(for='post-title')  Article Title 
-            |  
-            input#post-title(style='padding-left: 5px;', type='text', hint='SDF')
-          .clearfix
-            button.btn.btn-default.pull-left(type='button')
-              | Insert Picture 
-              i.fa.fa-picture-o(aria-hidden='true')
-          .boldita
-            imput.hovering
-              i.fa.fa-bold(aria-hidden='true')
-            imput.hovering
-              i.fa.fa-italic(aria-hidden='true')
-            imput.hovering
-              i.fa.fa-underline(aria-hidden='true')
-            imput.hovering
-              i.fa.fa-align-left(aria-hidden='true')
-            imput.hovering
-              i.fa.fa-align-center(aria-hidden='true')
-            imput.hovering
-              i.fa.fa-align-right(aria-hidden='true')
-            imput.hovering
-              i.fa.fa-list(aria-hidden='true')
-            imput.hovering
-              i.fa.fa-list-ol(aria-hidden='true')
-          textarea.post-content(rows='10')
-          button.btn.btn-success.hoveringy.pull-left(type='button')
-            | Save Draft 
-            i.fa.fa-file-archive-o(aria-hidden='true')
-          button.btn.btn-success.hoveringy.pull-left(type='button')
-            | Post 
-            i.fa.fa-paper-plane(aria-hidden='true')
-    //
-      Bootstrap core JavaScript
-      ==================================================
-    // Placed at the end of the document so the pages load faster
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
-    script.
-      window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\\/script>')
-    script(src='javascripts/bootstrap.min.js')
-    // IE10 viewport hack for Surface/desktop Windows 8 bug
+extends layout
+
+block content
+  link(href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet")
+  .container
+    .starter-template
+      h1 Articles - Admin Dash
+      p.lead
+        | Use this page to submit a new articles.
+    .editor-outer-wrapper(style="width: 65%; min-width: 500px; max-width: 650px; margin-left: auto; margin-right: auto;")
+      #editor-container
+        .center-every
+          label.center-text.post-title-label(for='post-title')  Article Title 
+          |  
+          input#post-title(style='padding-left: 5px;', type='text', hint='SDF')
+          
+        #editor(style="margin-left: auto; margin-right: width: 65%; min-width: 500px; max-width: 650px;")
+        .button-container(style="text-align: center;")
+          button.btn.btn-default(onclick="post()") Go!
+
+  script(src="https://cdn.quilljs.com/1.0.0/quill.js")
+  script(src='javascripts/postUtils.js')
+  
+  
