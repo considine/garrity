@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var imageDimens =  require('../models/cover-image');
 var blogPost =  require('../models/blog-post');
 var multer = require('multer');
-var styler = require('../app/utils/styler');
+
 var blogmailer = require('../app/utils/send-mail');
 var router = express.Router();
 var fs = require('fs');
@@ -20,9 +20,8 @@ mongoose.connect ('mongodb://localhost/garrity', function (err) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('adminpanel', { title: 'Express' });
+  res.render('admin/adminpanel', { title: 'Express' });
 });
-
 
 
 
@@ -50,7 +49,7 @@ router.post('/upl', multer(upload).single('upl'), function(req,res){
 	{ title: 'abc' }
 	 */
 	console.log(req.file); //form files
-	 res.render("adminpanel-image", {imgsrc: req.file.filename});
+	 res.render("admin/adminpanel-image", {imgsrc: req.file.filename});
 });
 
 
@@ -70,8 +69,20 @@ router.post('/savedataimg', function (req, res) {
   res.send({data : responses});
 });
 router.get('/dash/:contentType', function(req, res, next) {
-	if (req.params.contentType == "blog_posts") res.render("adminpanel-posts", {"contentType" : "Blog Posts"});
-	else if (req.params.contentType == "stories") res.render("adminpanel-posts", {"contentType" : "Stories"});
+
+
+
+	if (req.params.contentType == "blog_posts") {
+    //first get all of the posts 
+
+    blogPost.find (function (err, posts) {
+      
+      res.render("admin/adminpanel-posts", {"contentType" : "Blog Posts", "posts" : posts});
+    });
+
+    
+  }
+	else if (req.params.contentType == "stories") res.render("admin/adminpanel-posts", {"contentType" : "Stories"});
 	else next('route');
 });
 
@@ -86,33 +97,13 @@ router.post('/saveimg', function(req, res) {
   });
   
 });
-router.get('/home', function (req, res) {
-  imageDimens.findOne({}).exec(function (err, dimens) {
-    if (err)  console.log(err);
-    res.render('home', {
-      mainimg :  "/images/" + dimens.img,
-      secondimg1 : "/images/" + dimens.img,
-      lgStyle : styler.styleLg(dimens),
-      mdStyle : styler.styleMd(dimens),
-      smStyle : styler.styleSm(dimens),
-      xsStyle : styler.styleXs(dimens),
-      secondimg2 : "/images/" + dimens.img
-
-
-    });
-    // 'athletes' contains the list of athletes that match the criteria.
-  });
-  
-});
-
-router.post('/send-blog', function (req, res) {
-   
+router.post('/data/blog', function (req, res) {
    function func() {
       var sjson = {};
       sjson["body"] = req.body.text;
       for (var i=0; i<req.body.imgs.length; i++) {
         console.log(req.body.imgs[i]);
-        sjson["body"] = sjson["body"].replace(req.body.imgs[i],"http://localhost:8000/" + req.body.imgs[i]);
+        sjson["body"] = sjson["body"].replace(req.body.imgs[i],"http://localhost:8000/uploads/emailImages/" + req.body.imgs[i]);
       }
       sjson["title"] = req.body.subject;
       new blogPost(sjson).save(function (e, req) {
@@ -121,16 +112,35 @@ router.post('/send-blog', function (req, res) {
       else console.log("error");
       });
     }
-    blogmailer.send(req.body, func);
-    
-  
- 
-  
+    func();
+    // blogmailer.send(req.body, func);
+});
+
+router.delete('/data/blog/:id', function (req, res) {
+  console.log(req.params.id);
+   blogPost.find({ _id : req.params.id }).remove(function (e, req) {
+
+    res.send("deleted");
+   });
+});
+
+router.get('/data/blog/:id', function (req, res) {
+   blogPost.find({ _id : req.params.id }, function (e, blog) {
+
+    res.send(blog)
+   });
 });
 
 
 router.get('/new-post', function (req, res) {
-  res.render('admin-edit-post');
+  res.render('admin/admin-edit-post', {'edit' : false});
+});
+
+router.get('/edit-post/:id', function (req, res) {
+  blogPost.findOne({ _id : req.params.id}).exec(function (err, post) {
+    res.render('admin/admin-edit-post', {'edit' : true, content : req.params.id});
+  });
+  // res.render('admin/admin-edit-post', {'edit' : true});
 });
 
 router.use(express.static('uploads'));

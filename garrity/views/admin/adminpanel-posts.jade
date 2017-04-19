@@ -1,0 +1,60 @@
+extends ../layout
+
+block content
+ 
+ div.container
+  div.starter-template
+   nav(aria-label="...")
+    ul.pagination.pagination-sm
+     li.active.page-item
+      a.page-link.linky(href="/TODO") Newsletters
+     li.page-item
+      a.page-link.linky(href="/TODO") Stories
+   h1 Recent #{contentType}
+   p
+    a
+     button Add New
+      i.fa.fa-plus(aria-hidden="true")
+   div.container
+    div.row
+     div.well
+      p.text-left Search Old #{contentType}
+      form.form(role="search")
+       div.input-group
+        input.form-control(type="text", name="json", placeholder="search")
+        div.input-group-btn
+         button.btn.btn-default(type="submit")
+          i.glyphicon.glyphicon-search
+     div.pagination-centered
+      table.table.table-striped.table-hover
+       tr
+        th Title
+        th Category
+        th Comments
+        th Date
+        
+        each thing in posts
+         tr(id="#{thing._id}")
+          td.align-left(style="text-align: left; width: 25%;")
+           a(href="#") #{thing.title}
+           p
+            a(style="color: blue;", href="/admin/edit-post/#{thing._id}") Edit
+             i.fa.fa-pencil-square-o(aria-hidden="true")
+            |   
+            a(style="color: #ff3b2d", onclick="deletePost('#{thing._id}')" href="#") Delete
+             i.fa.fa-trash
+          td.align-left(style="text-align: left; width: 25%;")
+           a(href="#") Diet
+          td.align-left(style="text-align: left; width: 25%;")
+           a(href="#") 17
+          td.align-left(style="text-align: left; text-decoration: none;") #{thing.time}
+    ul.pager
+      li.previous
+        a(href="#")&larr;
+      li.next
+        a(href="#")&rarr;
+
+
+block scripts
+  script(src='/javascripts/postUtils.js')
+

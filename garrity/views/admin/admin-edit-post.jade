@@ -1,0 +1,96 @@
+extends ../layout
+
+block stylesheets
+  link(rel="stylesheet" href="/stylesheets/add-post.css")
+
+
+block content
+  
+ 
+  .container.main-content
+    //- .starter-template
+    //-   h1 TLDR Blogs - Admin Dash
+    //-   p.lead
+    //-     | Use this page to submit new blogs.
+
+ 
+    //- .center-every#titleInput
+    //-   label.center-text.post-title-label(for='post-title')  Article Title 
+    //-   |  
+    //-   input#post-title(style='padding-left: 5px; z-index: 99999;',  hint='SDF')
+    .row(style="margin-top: 24px;")
+      h3(style="padding-left: 24px;") Add New Post
+      .col-sm-8.col-xs-12
+        input#title-input.form-control(type='text', placeholder='ENTER TITLE HERE')
+        .editor-outer-wrapper
+          #editor-container
+            
+            #toolbar
+              select.ql-font
+                option(selected) Sans Serif
+                option(value="mirza") Mirza
+                option(value="roboto") Roboto 
+                option(value="oswald") Oswald
+                option(value="comics sans ms") Comic Sans Ms
+
+              select.ql-size
+                option(selected)
+                option(value="large")
+                option(value="huge")
+              
+              span.ql-formats
+                button.ql-bold
+                button.ql-italic
+                button.ql-underline
+                button.ql-strike
+              span.ql-formats
+                button.ql-image
+              select.ql-align
+                option(selected="")
+                option(value="center")
+                option(value="right")
+                option(value="justify")
+              
+
+                
+            #editor
+            //- .button-container(style="text-align: center;")
+            //-   button.btn.btn-default(onclick="post()") Go!
+      .col-sm-4.col-xs-12
+        
+        form
+            
+          .form-group
+            label.col-sm-2.control-label(for='postAuthor') Author
+            |     
+            input#postAuthor.form-control(type='text', value='Garrity McOscar')
+          |   
+          .panel.panel-default.featured-panel-wrapper
+            .panel-heading
+              h3.panel-title Featured Image
+            .panel-body
+              p.not-set-featured Featured Image Not Set!
+            .panel-body
+              a.btn.btn-default(href="#") Set Featured Image 
+              //- img(style="width: 100%" src="http://www.notable-quotes.com/a/muhammad_ali_quote.jpg")
+    
+
+          .form-group.publish-button-wrapper
+            
+            
+            button.btn.btn-default.save-draft(onclick="save()") Save Draft
+            button.btn.btn-default.publish(onclick="post()") Go!
+
+
+block scripts
+  script(src="https://cdn.quilljs.com/1.0.0/quill.js")
+  script(src='/javascripts/postUtils.js')
+  script.
+    initQuill();
+  if edit
+
+    script.
+      fillEditContent('#{content}');
+  
+  
+  

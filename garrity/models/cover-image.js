@@ -34,7 +34,9 @@ var mainSchema = new Schema({
 	scnd : middleSchema2,
 	thrd : {xs : gchildSchema},
 	time : { type : Date, default: Date.now },
-	img : String
+	img : String,
+	height : Number,
+	width : Number
 
 });
 

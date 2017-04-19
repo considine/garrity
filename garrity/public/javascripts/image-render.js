@@ -49,6 +49,13 @@ function setPerc (fun) {
         else {
             percY = 100 * currentConfig["posY"] / ( $('#' + currentCont + "-" + currentSize).height() - imgHeight);
         }
+
+        console.log(rat);
+        // now set the percentages of the background
+        currentConfig["bgWidth"] = 100 * currentConfig["bgWidth"] / $("#" + currentCont + "-"  +currentSize).width();
+        posAndArticleArray["height"] = h;
+        posAndArticleArray["width"] = w;
+
         currentConfig["bgPerc"] = percX + "% " + percY + "%";
 
         fun(); 

@@ -2,12 +2,18 @@ doctype html
 html
  head
   title= title
+  link(href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet")
+  link(href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet")
   link(rel='stylesheet', href='/stylesheets/style.css')
   link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
   link(rel='stylesheet', href='/stylesheets/image-panel.css')
-  link(rel='stylesheet', href='/stylesheets/starter-template.css')
+  //- link(rel='stylesheet', href='/stylesheets/starter-template.css')
+  link(rel="stylesheet", href="/stylesheets/quillfonts.css")
+  link(rel="stylesheet" href="/stylesheets/sign.css")
+
+  block stylesheets
   
-  script(src="https://use.fontawesome.com/63edd0bcb2.js")
+  //- script(src="https://use.fontawesome.com/63edd0bcb2.js")
  body
   nav.navbar.navbar-inverse.navbar-fixed-top
    div.container
@@ -37,6 +43,5 @@ html
 
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
   script(src="/javascripts/bootstrap.min.js")
-  script(src="/javascripts/image-render.js")
-  script(src="/javascripts/resizer.js")
 
+  block scripts
