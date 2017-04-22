@@ -3,14 +3,14 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var gchildSchema = new Schema({ 
-	posX: Number,
-	posY: Number,
+	posX: String,
+	posY: String,
 	startX: Number,
 	startY : Number,
 	lastX : Number,
 	lastY : Number,
 	bgHeight : Number,
-	bgWidth : Number,
+	bgWidth : String,
 	bgPerc : String
 });
 

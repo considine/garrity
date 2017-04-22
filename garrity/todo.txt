@@ -1,3 +1,24 @@
 https session.. see https://github.com/expressjs/session
 
 app.js line 37, check user in db for session
+
+
+
+
+#portfolioModal1.portfolio-modal.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
+    .modal-dialog
+    .modal-content
+     .close-modal(data-dismiss='modal')
+       .lr
+         .rl
+     .container
+       .row
+         .col-lg-8.col-lg-offset-2
+           .modal-body
+            div#step1
+              h3.step-header Step 1: Image Upload
+              form.image-form#image-form(method="post",enctype="multipart/form-data",action="/admin/upl")
+                input.file-upload-input#file(type="file",name="upl")
+                button.btn.btn-default#go-button(type="submit") Go
+                span#status
+            div#step2-container

@@ -2,11 +2,25 @@ extends ../layout
 
 
 block content
-  div#step1
-    h3.step-header Step 1: Image Upload
-    form.image-form(method="post",enctype="multipart/form-data",action="/admin/upl")
-      input.file-upload-input(type="file",name="upl")
+ #portfolioModal1.portfolio-modal.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
+ .modal-dialog
+ .modal-content
+   .close-modal(data-dismiss='modal')
+     .lr
+       .rl
+   .container
+     .row
+       .col-lg-8.col-lg-offset-2
+         .modal-body
+          div#step1
+            h3.step-header Step 1: Image Upload
+            form.image-form#image-form(method="post",enctype="multipart/form-data",action="/admin/upl")
+              input.file-upload-input#file(type="file",name="upl")
+              button.btn.btn-default#go-button(type="submit") Go
+              span#status
+          div#step2-container
 
-      input(type="submit") 
-
-  
+ 
+block scripts
+  script(src="/javascripts/ajaxImage.js")
+  script(src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js")

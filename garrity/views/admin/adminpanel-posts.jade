@@ -7,15 +7,19 @@ block content
    nav(aria-label="...")
     ul.pagination.pagination-sm
      li.active.page-item
-      a.page-link.linky(href="/TODO") Newsletters
+      a.page-link.switch-bar(href="/TODO") Newsletters
      li.page-item
-      a.page-link.linky(href="/TODO") Stories
+      a.page-link.switch-bar(href="/TODO") Stories
+     li.page-item
+      a.page-link.switch-bar(href="/TODO") Pages
+     li.page-item
+      a.page-link.switch-bar(href="/TODO") Widgets
    h1 Recent #{contentType}
    p
-    a
+    a(href="/admin/new-post")
      button Add New
       i.fa.fa-plus(aria-hidden="true")
-   div.container
+   div.container(style="max-width: 100%;")
     div.row
      div.well
       p.text-left Search Old #{contentType}
@@ -29,8 +33,8 @@ block content
       table.table.table-striped.table-hover
        tr
         th Title
-        th Category
-        th Comments
+        th Published
+        th Views
         th Date
         
         each thing in posts
@@ -44,15 +48,27 @@ block content
             a(style="color: #ff3b2d", onclick="deletePost('#{thing._id}')" href="#") Delete
              i.fa.fa-trash
           td.align-left(style="text-align: left; width: 25%;")
-           a(href="#") Diet
+            div
+              if thing.published
+                p Yes
+                  |   
+                  |   
+                  if !thing.upToDate
+                    i.glyphicon.glyphicon-pushpin
+              if !thing.published
+                p No
+                  if !thing.upToDate
+                    i.glyphicon.glyphicon-pushpin
+
+
           td.align-left(style="text-align: left; width: 25%;")
-           a(href="#") 17
+           a(href="#") #{thing.views}
           td.align-left(style="text-align: left; text-decoration: none;") #{thing.time}
     ul.pager
       li.previous
-        a(href="#")&larr;
+        a(href="#") &larr;
       li.next
-        a(href="#")&rarr;
+        a(href="#") &rarr;
 
 
 block scripts

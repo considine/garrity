@@ -55,6 +55,11 @@
     .image-holder {
       width: 551px;
       height: 496px;
+
+      @media (max-width: 768px) {
+        width: 275.5px;
+        height: 248px;
+      }
      
       
     }
@@ -63,6 +68,11 @@
     .image-holder {
     width: 551px;
     height: 396px;
+
+     @media (max-width: 768px) {
+        width: 275.5px;
+        height: 198px;
+      }
     }
   }
 
@@ -70,12 +80,23 @@
     .image-holder {
     width: 470px;
     height: 296px;
+
+     @media (max-width: 768px) {
+        width: 235px;
+        height: 148px;
+      }
     }
   }
   .image-holder-wrapper-main-xs {
       .image-holder {
       width: 741px;
       height: 196px;
+
+
+       @media (max-width: 768px) {
+        width: 370.5px;
+        height: 124px;
+      }
     }
 
   }
@@ -83,31 +104,59 @@
  .image-holder {
       width: 555px;
       height: 250px;
+
+      @media (max-width: 768px) {
+        width: 277.25px;
+        height: 125px;
+      }
+
     }
   }
   .image-holder-wrapper-scnd-md {
      .image-holder {
       width: 555px;
       height: 200px;
+
+      @media (max-width: 768px) {
+        width: 277.25px;
+        height: 100px;
+      }
     }
   }
   .image-holder-wrapper-scnd-sm {
      .image-holder {
       width: 495px;
       height: 150px;
+
+      @media (max-width: 768px) {
+        width: 247.5px;
+        height: 75px;
+      }
     }
   }
   .image-holder-wrapper-scnd-xs {
      .image-holder {
       width: 382px;
       height: 200px;
+    
+
+    @media (max-width: 768px) {
+        width: 191px;
+        height: 100px;
+      }
     }
   }
-  .image-holder-wrapper-thrd-xs {
+  .image-holder-wrapper-third-xs {
      .image-holder {
       width: 145px;
       height: 115px;
+
+      @media (max-width: 768px) {
+        width: 72.5px;
+        height: 57.5px;
+      }
     }
+
   }
 }
 

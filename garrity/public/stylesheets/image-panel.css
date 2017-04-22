@@ -1,4 +1,4 @@
- .image-holder {
+.image-holder {
   cursor: pointer;
   margin-left: auto;
   margin-right: auto;
@@ -40,30 +40,66 @@
   .myContainer .image-holder-wrapper-main-lg .image-holder {
     width: 551px;
     height: 496px; }
+    @media (max-width: 768px) {
+      .myContainer .image-holder-wrapper-main-lg .image-holder {
+        width: 275.5px;
+        height: 248px; } }
 .myContainer .image-holder-wrapper-main-md .image-holder {
   width: 551px;
   height: 396px; }
+  @media (max-width: 768px) {
+    .myContainer .image-holder-wrapper-main-md .image-holder {
+      width: 275.5px;
+      height: 198px; } }
 .myContainer .image-holder-wrapper-main-sm .image-holder {
   width: 470px;
   height: 296px; }
+  @media (max-width: 768px) {
+    .myContainer .image-holder-wrapper-main-sm .image-holder {
+      width: 235px;
+      height: 148px; } }
 .myContainer .image-holder-wrapper-main-xs .image-holder {
   width: 741px;
   height: 196px; }
+  @media (max-width: 768px) {
+    .myContainer .image-holder-wrapper-main-xs .image-holder {
+      width: 370.5px;
+      height: 124px; } }
 .myContainer .image-holder-wrapper-scnd-lg .image-holder {
   width: 555px;
   height: 250px; }
+  @media (max-width: 768px) {
+    .myContainer .image-holder-wrapper-scnd-lg .image-holder {
+      width: 277.25px;
+      height: 125px; } }
 .myContainer .image-holder-wrapper-scnd-md .image-holder {
   width: 555px;
   height: 200px; }
+  @media (max-width: 768px) {
+    .myContainer .image-holder-wrapper-scnd-md .image-holder {
+      width: 277.25px;
+      height: 100px; } }
 .myContainer .image-holder-wrapper-scnd-sm .image-holder {
   width: 495px;
   height: 150px; }
+  @media (max-width: 768px) {
+    .myContainer .image-holder-wrapper-scnd-sm .image-holder {
+      width: 247.5px;
+      height: 75px; } }
 .myContainer .image-holder-wrapper-scnd-xs .image-holder {
   width: 382px;
   height: 200px; }
-.myContainer .image-holder-wrapper-thrd-xs .image-holder {
+  @media (max-width: 768px) {
+    .myContainer .image-holder-wrapper-scnd-xs .image-holder {
+      width: 191px;
+      height: 100px; } }
+.myContainer .image-holder-wrapper-third-xs .image-holder {
   width: 145px;
   height: 115px; }
+  @media (max-width: 768px) {
+    .myContainer .image-holder-wrapper-third-xs .image-holder {
+      width: 72.5px;
+      height: 57.5px; } }
 
 #step2 {
   /*display: none;*/ }

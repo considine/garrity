@@ -1,39 +1,67 @@
- var clicking = false;
-       
-
-
+var clicking = false;
 var screenSize = getScreenWidth();
 var sizes = ["xs", "sm", "md", "lg"];
 var posArray = {};
-
-
+var done = false;
 // todo: replace ugly  class references with some json map at the beginning
-
 function nextImage () {
     // block on set perc, then do the rest
     // via ugly callback
-     console.log("bg width is " + currentConfig["bgWidth"]);
+
     setPerc (function () {
         $('.image-holder-wrapper-' + currentCont + "-" + currentSize).css('display', "none");
         if (getNextConfiguration()) {
             $('.image-holder-wrapper-' + currentCont + "-" + currentSize).css('display', "block");
+            console.log('.image-holder-wrapper-' + currentCont + "-" + currentSize);
             currentConfig["posX"] = 0;
             currentConfig["posY"] = 0;
             setMinBackgroundParams();
         }
         else {
             saveIMG();
+            done = true;
             
-        }
+        } 
     });
+}
+
+function centerRest () {
+
+    setGo();
+    while (getNextConfiguration()) {
+        setGo();
+    }
+
+    console.log("DONE");
+    saveIMG();
+    done = true;
     
+
+    
+    function setGo () {
+        console.log("SET GO!");
+        currentConfig["bgWidth"] = "cover";
+        currentConfig["posX"] = "center";
+        currentConfig["posY"] = "center";
+    }
+
+}
+
+
+function getBoxWidth() {
+    return getBox().width();
+}
+function getBoxHeight() {
+    return getBox().height();
+}
+function getBox () {
+    return $('#' + currentCont + "-" + currentSize);
 }
 
 function setPerc (fun) {
-    console.log(JSON.stringify(posAndArticleArray));
+   
     getRatio (function (h, w) {
         var rat = h / w;
-        
         var imgHeight = rat*currentConfig["bgWidth"];
         var percY;
         var percX;
@@ -41,7 +69,6 @@ function setPerc (fun) {
             percX = 0;
         }else {
             var percX = 100 * currentConfig["posX"] / ( $('#' + currentCont + "-" + currentSize).width() - currentConfig["bgWidth"]);
-
         }
         if ($('#' + currentCont + "-" + currentSize).height() - imgHeight == 0) {
             percY = 0;
@@ -49,15 +76,11 @@ function setPerc (fun) {
         else {
             percY = 100 * currentConfig["posY"] / ( $('#' + currentCont + "-" + currentSize).height() - imgHeight);
         }
-
-        console.log(rat);
         // now set the percentages of the background
-        currentConfig["bgWidth"] = 100 * currentConfig["bgWidth"] / $("#" + currentCont + "-"  +currentSize).width();
+        currentConfig["bgWidth"] = (100 * currentConfig["bgWidth"] / $("#" + currentCont + "-"  +currentSize).width()) + "%";
         posAndArticleArray["height"] = h;
         posAndArticleArray["width"] = w;
-
         currentConfig["bgPerc"] = percX + "% " + percY + "%";
-
         fun(); 
     });
 }
@@ -85,21 +108,18 @@ function getImageFile () {
     return background.src.split("/")[strInd];
 
 }
-
 function getBackgroundSrc () {
-    
     return document
                     .getElementsByClassName('image-holder')[0]
                      .style
                       .backgroundImage
                        .replace(/url\((['"])?(.*?)\1\)/gi, '$2')
                         .split(',')[0];
-    
 }
 
 
 
-var articleTypes = {"main" : ["lg", "md", "sm", "xs"], "scnd" : ["lg", "md", "sm", "xs"], "thrd" : ["xs"]};
+var articleTypes = {"main" : ["lg", "md", "sm", "xs"], "scnd" : ["lg", "md", "sm", "xs"], "third" : ["xs"]};
 // so we know whats next
 var orderArray = [];
 for (var key in articleTypes) {
@@ -112,10 +132,7 @@ for (var key in articleTypes) {
         }
     }
 }
-
-
 getObj();
-
 var posAndArticleArray = {};
 for (var key in articleTypes) {
     posAndArticleArray[key] = {};
@@ -147,7 +164,8 @@ $('#next-image').click(nextImage);
 var currentCont = "main";
 var currentSize = "lg";
 var currentConfig  = posAndArticleArray[currentCont][currentSize];
-setScreenParams();$('#' + currentCont + "-" + "md").css("background-size", posAndArticleArray[currentCont]["md"]["bgWidth"] + "px");    
+setScreenParams();
+$('#' + currentCont + "-" + "md").css("background-size", posAndArticleArray[currentCont]["md"]["bgWidth"] + "px");    
 
 setMinBackgroundParams();
 // setScreenParams();
@@ -189,6 +207,11 @@ function updateScreenAndCatch () {
         setScreenParams();
     });
 }
+
+$( window ).resize(function() {
+    setMinBackgroundParams();
+});
+
 $(document).mouseup(function(e){
     if(clicking == false) return;
     clicking = false;
@@ -202,7 +225,7 @@ $('.image-holder').mousemove(function(){
     currentConfig["posX"] =  event.offsetX -  currentConfig["startX"];
 
     currentConfig["posY"] =  event.offsetY - currentConfig["startY"];
-   console.log("dragged");
+  
     setScreenParams();
   
 });
@@ -253,7 +276,6 @@ $(".zoom-in-button").click(function () {
     if (currentSize == "sm" || currentSize == "xs")
         increment = 50;
     else increment = 100;
-
     checkDimensions(increment);
     updateScreenAndCatch();
 });
@@ -261,22 +283,12 @@ $(".zoom-in-button").click(function () {
 
 function setScreenParams () {
     var posXpx =currentConfig["posX"] + 'px';
-
     var percX = 100* (currentConfig["posX"] + currentConfig["bgWidth"]/2) / $('#' + currentCont + "-" + currentSize).width();
-    // console.log (percX);
     var posYpx = currentConfig["posY"] + 'px';
-    // alert(posX, posY);
     var newHeight =currentConfig["bgHeight"] + 'px';
     var newWidth = currentConfig["bgWidth"] + 'px';
-    
     $('#' + currentCont + "-" + currentSize).css('background-position-x', posXpx);
-    // $('#' + currentCont + "-" + currentSize).css('background-position-x', percX + "%");
-    console.log('#' + currentCont + "-" + currentSize);
-
-
-    $('#' + currentCont + "-" + currentSize).css('background-position-y',  posYpx);
-    
-   
+    $('#' + currentCont + "-" + currentSize).css('background-position-y',  posYpx); 
     $('#' + currentCont + "-" + currentSize ).css("background-size", newWidth);
 }
 function getScreenWidth () {
@@ -305,13 +317,11 @@ $('.screen-size-indic').click(function () {
         "md" : "400px",
         "lg" : "500px"
     }
-
     screenSize = myjson[$(this).attr("id")];
-    $(".image-holder").css("width", sizes[screenSize]);
+    $(".image-holder").css("max-width", sizes[screenSize]);
      $(".image-holder").css("height", sizes[screenSize] );
     updateBar($(this).attr("id"));
     setScreenParams();
-
 });
 
 // we have startX, and background position size!
@@ -325,14 +335,36 @@ function updateBar (barId) {
 
 function saveIMG () {
     posAndArticleArray["img"] = getImageFile();
+    // what are minimum sizes?
+    var mins = {"xs" : "0px", "sm" : "768px", "md" : "992px", "lg" : "1200px"}
+    var css = "";
+    jQuery.each(mins, function (i, val) {
+        css += ("@media (max-width: " + val + ") {\n "  +i + "\n}\n");
+    });
+    
+    console.log(css);
+    return;
+
+
     $.ajax({
-        url: './saveimg',
+        url: '/admin/saveimg',
         type: "POST",
         contentType: 'application/json', 
         data : JSON.stringify(posAndArticleArray), 
-        success : function () {
-        alert("Your shit was saved")}
-    });
+        success : function (resp) {
+            console.log(JSON.stringify(resp));
+            try {
+                // try to call function that will load this image into the box
+                console.log(JSON.stringify(resp));
+                setFeaturedImage(resp.id);
+            }
+            catch (e) {
+                //pass
+            }
+            $('#myModal').modal('hide');
+            
+        }
+        });
 
 }
 
@@ -343,25 +375,22 @@ function getRatio (func) {
     var background = new Image();
     background.src = getBackgroundSrc()
     $(background).load(function () {
-         
         var h = background.height;
         var w = background.width;
         func(h, w);
-       
     });
 }
 
 
 
 
+
+
 function setMinBackgroundParams () {
-    
     getRatio (function(h, w) {
-        
         var ratio = h/w;
         var hf = $('#' + currentCont + "-" + currentSize).height();
         var wf = $('#' + currentCont + "-" + currentSize).width();
-
         var frame_ratio = hf/wf;
         // see which is greater
         if (frame_ratio < ratio) {
@@ -371,11 +400,10 @@ function setMinBackgroundParams () {
             
         }
         else {
-            console.log("bg width is " + currentConfig["bgWidth"]);
+          
             currentConfig["bgWidth"] = Math.ceil(hf / ratio);
             currentConfig["bgHeight"] = hf;
         }   
-       
         setScreenParams();
     });
      // $('#' + currentCont + "-" + currentSize).css("background-size", "cover");

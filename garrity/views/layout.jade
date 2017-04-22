@@ -1,15 +1,16 @@
 doctype html
-html
+html.fa-events-icons-ready
  head
   title= title
-  link(href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet")
-  link(href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet")
+  
   link(rel='stylesheet', href='/stylesheets/style.css')
   link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-  link(rel='stylesheet', href='/stylesheets/image-panel.css')
+  
   //- link(rel='stylesheet', href='/stylesheets/starter-template.css')
   link(rel="stylesheet", href="/stylesheets/quillfonts.css")
   link(rel="stylesheet" href="/stylesheets/sign.css")
+  link(rel='stylesheet', href='/stylesheets/starter-template.css')  
+  //- link(rel='stylesheet', href='/stylesheets/home.css')
 
   block stylesheets
   
@@ -23,20 +24,19 @@ html
       span.icon-bar
       span.icon-bar
       span.icon-bar
-     a.navbar-brand(href="#") logo
+     a.navbar-brand(href="#") TLDR;
     div#navbar.collapse.navbar-collapse
      ul.nav.navbar-nav
       li.active
-       a(href="#") HOME
+       a(href="/home") HOME
       li
        a(href="#") FIGHT ANALYSIS
       li
        a(href="#") ABOUT
      form.navbar-form.navbar-right
       a(href="#")
-       img(src="assets/mailicon.png", hieght=35)
+       i.fa.fa-envelope-o.fa-2x(aria-hidden="true", style="color: black;")
   
-
 
 
   block content

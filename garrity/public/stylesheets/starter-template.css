@@ -11,13 +11,23 @@
   margin-left: 1px; }
 
 .navbar-inverse .navbar-nav > li > a {
-  color: white !important; }
+  color: black !important; }
 
 .navbar-inverse .navbar-brand {
   color: white; }
 
-.story-1-wrapper.content-holder {
-  height: 100%; }
+@media (max-width: 992px) {
+  .col-xs-0 {
+    display: none; } }
+
+.switch-bar {
+  width: inherit; }
+  @media (max-width: 768px) {
+    .switch-bar {
+      font-size: 10px !important; } }
+  @media (min-width: 768px) {
+    .switch-bar {
+      font-size: 12px !important; } }
 
 html, body {
   height: 100%;
@@ -56,6 +66,7 @@ footer {
   width: 100px; }
 
 body {
+  padding: 0px;
   padding-top: 40px; }
 
 .starter-template {
@@ -111,9 +122,7 @@ body {
 
 .panel-default {
   width: 60%;
-  min-width: 200px;
-  height: 36px;
-  line-height: 36px; }
+  min-width: 200px; }
 
 #add-member-button {
   width: 20%; }
@@ -152,8 +161,8 @@ div.myClass [class*="col"] {
   background-color: black;
   color: #9d9d9d; }
 
-.content-wrapper {
-  height: 500px; }
+.nested-content-holder {
+  height: 100%; }
 
 .nested-content-col {
   height: 50%; }
@@ -169,13 +178,13 @@ div.myClass [class*="col"] {
   margin-right: auto; }
 
 @media (max-width: 768px) {
-  .col-xs-0 {
-    display: none;
-  }
   .nested-content-col {
     height: 100%; }
 
-  .content-wrapper {
+  .story-1-wrapper {
+    height: 200px; }
+
+  .secondary-content-holder {
     height: 200px; }
 
   .main-content-thumbnail.story-1 {
@@ -185,25 +194,34 @@ div.myClass [class*="col"] {
   .nested-content-col {
     height: 50%; }
 
-  .content-wrapper {
+  .story-1-wrapper {
+    height: 300px; }
+
+  .secondary-content-holder {
     height: 300px; }
 
   .main-content-thumbnail.story-1 {
     width: 100%; } }
 @media (min-width: 992px) {
-  .content-wrapper {
+  .story-1-wrapper {
     height: 400px; }
 
   .nested-content-col {
-    height: 50%; } }
+    height: 50%; }
+
+  .secondary-content-holder {
+    height: 400px; } }
 @media (min-width: 1200px) {
-  .content-wrapper {
+  .story-1-wrapper {
+    height: 500px; }
+
+  .secondary-content-holder {
     height: 500px; } }
 .navbar {
   background-color: #2a2840; }
 
 .active a {
-  background-color: #333353 !important; }
+  background-color: #cccccc !important; }
 
 .story-1-wrapper {
   text-align: center;
@@ -239,22 +257,22 @@ div.myClass [class*="col"] {
   vertical-align: text-bottom; }
 
 .main-content-thumbnail.story-1 {
-  background-image: linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)), url(../images/bg.jpg);
+  background-image: linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)), url(../assets/bg.jpg);
   background-color: white;
   cursor: pointer; }
 
 .main-content-thumbnail.story-1:hover {
-  background-image: linear-gradient(rgba(20, 20, 20, 0.1), rgba(20, 20, 20, 0.1)), url(../images/bg.jpg);
+  background-image: linear-gradient(rgba(20, 20, 20, 0.1), rgba(20, 20, 20, 0.1)), url(../assets/bg.jpg);
   background-color: white;
   cursor: pointer; }
 
 @media (max-width: 768px) {
   .main-content.story-1 {
-    background-image: linear-gradient(rgba(20, 20, 20, 0.1), rgba(20, 20, 20, 0.1)), url(../images/bg.jpg);
+    background-image: linear-gradient(rgba(20, 20, 20, 0.1), rgba(20, 20, 20, 0.1)), url(../assets/bg.jpg);
     background-color: white;
     cursor: pointer; } }
 .nested-content-col.main-content-2 {
-  background-image: linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)), url(../images/main-article2.jpg);
+  background-image: linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)), url(../assets/main-article2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
@@ -262,7 +280,7 @@ div.myClass [class*="col"] {
   cursor: pointer; }
 
 .nested-content-col.main-content-2:hover {
-  background-image: linear-gradient(rgba(20, 20, 20, 0.1), rgba(20, 20, 20, 0.1)), url(../images/main-article2.jpg);
+  background-image: linear-gradient(rgba(20, 20, 20, 0.1), rgba(20, 20, 20, 0.1)), url(../assets/main-article2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
@@ -270,7 +288,7 @@ div.myClass [class*="col"] {
   cursor: pointer; }
 
 .nested-content-col.main-content-3 {
-  background-image: linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)), url(../images/cm.jpg);
+  background-image: linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)), url(../assets/cm.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
@@ -278,7 +296,7 @@ div.myClass [class*="col"] {
   cursor: pointer; }
 
 .nested-content-col.main-content-3:hover {
-  background-image: linear-gradient(rgba(20, 20, 20, 0.1), rgba(20, 20, 20, 0.1)), url(../images/cm.jpg);
+  background-image: linear-gradient(rgba(20, 20, 20, 0.1), rgba(20, 20, 20, 0.1)), url(../assets/cm.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
@@ -294,6 +312,13 @@ a {
 a:focus, a:hover {
   color: #2a2840;
   text-decoration: underline; }
+
+.navbar.navbar-inverse.navbar-fixed-top {
+  background-color: #eeeeee;
+  border-bottom: 2px solid black; }
+
+.navbar-inverse .navbar-toggle {
+  background-color: gray; }
 
 .btni {
   background-color: #2a2840;

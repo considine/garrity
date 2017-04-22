@@ -1,21 +1,15 @@
-
 var editor;
-function post () {
-	// var i  = '<div style="width: 65%; min-width: 500px; max-width: 650px; margin-left: auto; margin-right: auto;">' + document.getElementById('editor').innerHTML + '<div>';
+var content = {};
+function getContent(publish, cb) {
 	var i  = document.getElementById('editor').innerHTML;
 	var myRegexp = /<img src="data.*?"/g;
 	var match; 
 	var dat = {};
 	dat["info"] = [];
-	
 	while ( match = myRegexp.exec(i) ) {
 		dat["info"].push(match[0].replace("src=\"", "").replace(/\"$/, ""));
-		;
 	}
-	//replace THEN 
 	var delta = JSON.stringify(editor.getContents());
-	// console.log(JSON.stringify(delta));
-	
 	$.ajax({ 
 		type: "POST", 
 		url : "/admin/savedataimg", 
@@ -23,36 +17,26 @@ function post () {
 		contentType: "application/json; charset=utf-8", 
 		dataType: "json",
 		success: function (data) {
-			console.log(data.data);
 			if (data.data.length != dat["info"].length) throw "Not all images saved ";
 			dat["imgs"] = data.data;
 			for (var j=0; j<dat["info"].length; j++) {	
-				i = i.replace(dat["info"][j], data.data[j]);
-
+				var replaced = dat["info"][j].replace("<img ", "");
+				i = i.replace(replaced, "/uploads/emailImages/" + data.data[j]);
+				delta = delta.replace(replaced, "/uploads/emailImages/" + data.data[j]);
 			}
-			dat["text"] = delta;
-			dat["subject"] = "SUBJECT";
-			// dat["subject"] = document.getElementById("post-title").value;
-			go (dat);
-
+			content["text"] = delta;
+			content["publish"] = publish;
+ 			content["author"] = $("#postAuthor").val();
+			if (publish) {
+				content["body"] = i.replace(/<input.*?>/, "").replace(/contenteditable=\".*?\"/, "");
+			}
+			console.log(publish + " IS publish");
+			cb();
 		}
 	});
-	function go (datum) {
-		console.log(datum);
-		$.ajax( {
-			type: "POST", 
-			url : "/admin/data/blog", 
-			data : JSON.stringify(datum), 
-			contentType: "application/json; charset=utf-8", 
-			dataType: "json",
-			sucess : function (resp) {
-				alert("SUCCESS");
-			}
-		});
-	}
+
+	return content;
 }
-
-
 function deletePost (id) {
 	$.ajax ({
 		type: "DELETE",
@@ -63,8 +47,6 @@ function deletePost (id) {
 		}
 	});
 }
-
-
 //HORRENDOUS workaround!
 $('#titleInput').click(function () {
 	setTimeout(function(){
@@ -75,25 +57,6 @@ function Callback(data)
      {
         alert(JSON.stringify(data));
      }
-
-
-
-
-
-
-// var toolbarOptions = [
-//   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-//   ['image'],            // custom button values
-//   [{ 'list': 'ordered'}, { 'list': 'bullet' }],            // text direction
-//   [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-//   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-//   [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-//   [{ 'font': [] }],
-//   [{ 'align': [] }],
-
-//   ['clean']                                         // remove formatting button
-// ];
-	
 function initQuill () {
 	var Font = Quill.import('formats/font');
 	// We do not add Aref Ruqaa since it is the default
@@ -105,16 +68,86 @@ function initQuill () {
 	theme: 'snow'
 	});
 }
+function loadFeaturedImage(id) {
+	// get image based on id
+	$.get("/featuredImage/" + id, function (resp) {
+		
+		refreshContent(false);
+		// setFeaturedImage(id);
+	});
 
-function fillEditContent (id) {
-	var post = $.get("/admin/data/blog/" + id, function (resp) {
-		var body = resp.body;
-		console.log(resp[0].body);
+}
+function refreshContent (publish) {
+	function cb () {
+		$.ajax ({
+			url: '/admin/data/blog/' + content._id,
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",  
+			type : 'PUT',
+			data: JSON.stringify(content), 
+			success : function(data) {
+				console.log("FROM SUCCESS");
+				try {
+					publish ? showMessage("publish_success") : showMessage("save_success");
+				} catch (err) {
+					//pass
+					console.log(err);
+				}
+				
+			},
+			error : function (err) {
+				console.log("FROM SUCCESS");
+				try {
+					publish ? showMessage("publish_error") : showMessage("save_error");
+				} catch (err2) {
+					//pass
+					console.log(err2);
+				}
+			},
+			complete : function () {
+				console.log("done!");
+				
+				// setFeaturedImage(id);
+			}
 
-		editor.setContents(JSON.parse(resp[0].body));
+		});
+	}
+	getContent(publish, cb);
+}
+$("#title-input").keyup(function () {
+	content.title = $(this).val();
+	console.log(content);
+});
+// function called when featured image is saved
+function setFeaturedImage(id) {
+	$.get('/featuredImage/' + id, function (resp) {
+		console.log("/uploads/images/" + resp.img);
+		$("#featured-image").html("<img style='width : 100%;' src='" + "/uploads/images/" + resp.img +"'>");
+		content.imageId = id;
+		// refreshContent(false);
 	});
 }
+function fillEditContent (id) {
+	var post = $.get("/admin/data/blog/" + id, function (resp) {
+		var body = resp.text;
 
+		if (resp[0].text) {
+			editor.setContents(JSON.parse(resp[0].text));
+		}
+		console.log(resp[0]);
+		if (resp[0].imageId) {
+			
+			setFeaturedImage(resp[0].imageId);
+		}
+		if (resp[0].title) {
+			$("#title-input").val(resp[0].title);
+		}
+		if (resp[0].author) {
+			$('#postAuthor').val(resp[0].author);
+		}
+
+		content = resp[0];
+		
+	});
+}
 $("#toolbar").css("display", "block");
-
-

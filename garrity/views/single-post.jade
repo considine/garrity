@@ -1,0 +1,93 @@
+extends layout
+
+block stylesheets
+ 
+  link(rel='stylesheet', href='/stylesheets/single-post.css')
+  link(href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
+  script(src="https://use.fontawesome.com/63edd0bcb2.js")
+  
+block content
+  .container
+    if admin
+      div(style="text-align: center; margin-top: 16px;")
+        a(href="/admin/edit-post/#{postid}", style="text-align: center; margin-top: 16px;")
+          div
+            i.glyphicon.glyphicon-edit(aria-hidden="true")
+            |  Edit Post
+    .row
+      .col-lg-12
+        h1#posttitle.page-header Title
+    .row 
+      .col-lg-8
+        p
+          i#posttime.fa-fa-clock-o(aria-hidden="true")
+        p
+          i#author.fa-fa-clock-o(aria-hidden="true") 
+        #featuredImageContainer
+          #featuredimage
+        div#postcontent(style="margin-top: 24px;")
+
+
+        hr
+      .col-md-4
+        .well
+          h4 Search
+           
+          form.form(role="search")
+            .input-group
+              input.form-control(type="text", placeholder="Search", name="q")
+              .input-group-btn
+                button.btn.btn-default(type="submit")
+                  span.glyphicon.glyphicon-search(aria-hidden="true")
+        .well 
+          h4
+            a(href="#")
+              i.fa.fa-plus-square-o(aria-hidden="true")
+              |   
+            a(href="#") Other Stories
+            .row
+              .col-lg-6
+                ul.list-unstyled
+                  li
+                    a(href="#") Title, Date
+                  li
+                    a(href="#") Title, Date
+                  li
+                    a(href="#") Title, Date
+                  li
+                    a(href="#") Title, Date
+              .col-lg-6
+                ul.list-unstyled
+                  li
+                    a(href="#") Title, Date
+                  li
+                    a(href="#") Title, Date
+                  li
+                    a(href="#") Title, Date
+                  li
+                    a(href="#") Title, Date
+        .well
+          h4 
+            i.fa.fa-newspaper-o(aria-hidden="true") 
+            |   Sign up for weekly Newsletter
+            
+          |   
+          p Get the latest updates and stories
+          button.btn.btn-primary.bni.center-block(type="button") Sign Up
+
+
+
+
+block scripts
+    script(src="/javascripts/loadPost.js")
+    script.
+        initPost('#{postid}')
+
+
+//- form.form(role="search")
+//-  .input-group
+//-    input.form-control(type="text", placeholder="Search", name="q")
+      	  	  
+
+      
+               

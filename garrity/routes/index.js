@@ -3,9 +3,9 @@ var crypto = require ('crypto');
 var mime = require ('mime');
 var mongoose = require('mongoose');
 var imageDimens =  require('../models/cover-image');
-var blogPost =  require('../models/blog-post');
+var content =  require('../models/blog-post');
+console.log(content.blog);
 var multer = require('multer');
-
 var blogmailer = require('../app/utils/send-mail');
 var router = express.Router();
 var fs = require('fs');
@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/images')
+    cb(null, './public/uploads/images')
   },
   filename: function (req, file, cb) {
     crypto.pseudoRandomBytes(16, function (err, raw) {
@@ -48,7 +48,7 @@ router.post('/upl', multer(upload).single('upl'), function(req,res){
 	/* example output:
 	{ title: 'abc' }
 	 */
-	console.log(req.file); //form files
+	
 	 res.render("admin/adminpanel-image", {imgsrc: req.file.filename});
 });
 
@@ -58,7 +58,8 @@ router.post('/savedataimg', function (req, res) {
   var img = req.body.info;
   var responses = [];
   for (var i=0; i< img.length; i++){
-    var data = img[i].replace(/^data:image\/\w+;base64,/, "");
+    var thisimg = img[i].replace("<img ", "");
+    var data = thisimg.replace(/^data:image\/\w+;base64,/, "");
    
     var buf = new Buffer(data, 'base64');
     var d = new Date();
@@ -66,6 +67,7 @@ router.post('/savedataimg', function (req, res) {
     fs.writeFile(__dirname + '/../public/uploads/emailImages/' + seconds + (i + '-image.png'), buf);
     responses.push(seconds + (i + '-image.png'));
   }
+
   res.send({data : responses});
 });
 router.get('/dash/:contentType', function(req, res, next) {
@@ -75,7 +77,7 @@ router.get('/dash/:contentType', function(req, res, next) {
 	if (req.params.contentType == "blog_posts") {
     //first get all of the posts 
 
-    blogPost.find (function (err, posts) {
+    content.blog.find (function (err, posts) {
       
       res.render("admin/adminpanel-posts", {"contentType" : "Blog Posts", "posts" : posts});
     });
@@ -86,27 +88,40 @@ router.get('/dash/:contentType', function(req, res, next) {
 	else next('route');
 });
 
-router.post('/saveimg', function(req, res) {
+router.post('/saveimg', function (req, res) {
   // console.log(req.body.img);
-  console.log(req.body)
+  
   new imageDimens(req.body).save(function (e, req) {
     console.log(e);
     if (e==null)
-      res.send('item saved');
+      res.send({id : req._id});
     else res.send("error");
   });
   
 });
+
+
+
+
+
 router.post('/data/blog', function (req, res) {
    function func() {
       var sjson = {};
-      sjson["body"] = req.body.text;
+      sjson["text"] = req.body.text;
+      sjson["body"] = req.body.body;
+      sjson["author"] = req.body.author;
+
+      if (!sjson["text"] || !sjson["body"] || !sjson["author"]) {
+        res.send(400, "attributes not set properly")
+      }
+     
       for (var i=0; i<req.body.imgs.length; i++) {
-        console.log(req.body.imgs[i]);
+        
         sjson["body"] = sjson["body"].replace(req.body.imgs[i],"http://localhost:8000/uploads/emailImages/" + req.body.imgs[i]);
+        sjson["text"] = sjson["text"].replace(req.body.imgs[i],"http://localhost:8000/uploads/emailImages/" + req.body.imgs[i]);
       }
       sjson["title"] = req.body.subject;
-      new blogPost(sjson).save(function (e, req) {
+      new content.blog(sjson).save(function (e, req) {
       if (e==null)
         console.log('item saved');
       else console.log("error");
@@ -116,16 +131,66 @@ router.post('/data/blog', function (req, res) {
     // blogmailer.send(req.body, func);
 });
 
+
+router.put('/data/blog/:id', function (req, res) {
+  var upd = req.body;
+  upd["lastEdited"] = Date.now();
+  
+  // content.blog.findOneAndUpdate({ _id : req.params.id }, upd, {upsert:true}, function(err, doc){
+  //   if (err) return res.send(500, { error: err });
+
+  //   res.send({"success" : true});
+    
+  // });
+  content.blog.findOne({ _id : req.params.id }, function (err, blogpost) {
+    blogpost.body = upd.body;
+    blogpost.title = upd.title;
+    if (req.body.publish) {
+      blogpost.published = true;
+       blogpost.upToDate = true;
+    }
+    //see if change 
+    if (blogpost.text == upd.text) {
+      // no change
+
+    }
+    
+      
+
+    else {
+      console.log("draft");
+      blogpost.lastEdited = Date.now();
+      blogpost.upToDate = false;
+      blogpost.lastEdited = Date.now();
+    }
+
+    blogpost.text = upd.text;
+    blogpost.author = upd.author;
+    blogpost.imageId = upd.imageId;
+    blogpost.save(function (err) {
+      if (err) {
+        return res.status(500).send({"error" : err});
+      }
+      return res.send({"success" : true});
+    })
+  });
+
+
+ 
+});
+
+
+
 router.delete('/data/blog/:id', function (req, res) {
-  console.log(req.params.id);
-   blogPost.find({ _id : req.params.id }).remove(function (e, req) {
+
+   content.blog.find({ _id : req.params.id }).remove(function (e, req) {
 
     res.send("deleted");
    });
 });
 
 router.get('/data/blog/:id', function (req, res) {
-   blogPost.find({ _id : req.params.id }, function (e, blog) {
+   content.blog.find({ _id : req.params.id }, function (e, blog) {
 
     res.send(blog)
    });
@@ -133,11 +198,17 @@ router.get('/data/blog/:id', function (req, res) {
 
 
 router.get('/new-post', function (req, res) {
-  res.render('admin/admin-edit-post', {'edit' : false});
+  // res.render('admin/admin-edit-post', {'edit' : false});
+   new content.blog({}).save(function (err, blog) {
+      res.redirect('/admin/edit-post/' + blog._id);
+   });
+  // REDIRECT!!!
+
+
 });
 
 router.get('/edit-post/:id', function (req, res) {
-  blogPost.findOne({ _id : req.params.id}).exec(function (err, post) {
+  content.blog.findOne({ _id : req.params.id}).exec(function (err, post) {
     res.render('admin/admin-edit-post', {'edit' : true, content : req.params.id});
   });
   // res.render('admin/admin-edit-post', {'edit' : true});

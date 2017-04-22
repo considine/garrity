@@ -3,8 +3,25 @@
 	margin-bottom: 24px;
 }
 
+body {
+	background-color: #f1f1f1;
+}
+#editor {
+	min-height: 400px;
+}
+
+.panel-body.btn-wrapper {
+	padding: 8px;
+}
+html{
+	height: 100%;
+}
+body { min-height: 100%; }
+
 .container.main-content {
 	background-color: #f1f1f1;
+	min-height: 100%;
+	padding-bottom: 24px;
 }
 
 .editor-outer-wrapper {
@@ -26,6 +43,7 @@
 }
 
 
+
 .featured-panel-wrapper  {
 	margin-left: auto;
 	margin-right: auto;
@@ -38,4 +56,12 @@
 }
 p.not-set-featured {
 	color: red;
+}
+
+.modal-dialog {
+	width: 100% !important;
+}
+
+.gone {
+	display: none;
 }

@@ -7,22 +7,21 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var crypto = require ('crypto');
+var content  = require('./models/blog-post');
+var blogpost = content.blog;
 var mime = require ('mime');
 var mongoose = require('mongoose');
 var passwordChecker = require("./app/utils/getpassword");
 var imageDimens =  require('./models/cover-image');
 var styler = require('./app/utils/styler');
-
 var app = express();
-
 var session =  require('express-session');
 var adminLogin = require('./models/admin-login');
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -33,24 +32,47 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
- 
 
 app.get('/home', function (req, res) {
-  imageDimens.findOne({}).exec(function (err, dimens) {
+  imageDimens.findOne({_id : "58f9abd5f56c4776cd08d84e"}).exec(function (err, dimens) {
     if (err)  console.log(err);
     res.render('home', {
-      mainimg :  "/images/" + dimens.img,
-      secondimg1 : "/images/" + dimens.img,
+      mainimg :  "/uploads/images/" + dimens.img,
+      secondimg1 : "/uploads/images/" + dimens.img,
       lgStyle : styler.styleLg(dimens),
       mdStyle : styler.styleMd(dimens),
       smStyle : styler.styleSm(dimens),
       xsStyle : styler.styleXs(dimens),
-      secondimg2 : "/images/" + dimens.img,
+      secondimg2 : "/uploads/images/" + dimens.img,
       coverCss : styler.coverQuery(dimens)
     });
     // 'athletes' contains the list of athletes that match the criteria.
   });
   
+});
+
+
+
+app.get('/featuredImage/:id', function (req, res) {
+  var id = req.params.id;
+  imageDimens.findOne({_id : req.params.id}).exec(function (err, featuredImage) {
+    res.send(featuredImage);
+
+  });
+});
+
+
+app.get('/post/:id', function (req, res) {
+  // todo: IF SESSION
+  var admin = false;
+  if (true) var admin = true; 
+  res.render('single-post', {postid : req.params.id, admin : admin});
+  
+});
+app.get("/postcontent/:id", function (req, res){
+  blogpost.findOne({_id : req.params.id}).exec(function (err, post) {
+   res.send(post);
+  });
 });
 
  var auth = function(req, res, next) {
@@ -89,8 +111,7 @@ app.post ("/admin/loginAttempt", bouncer.block, function (req, res)
     req.session.user = req.body.user;
     res.send({login : "Success"});
   }
-  console.log(req.body.user);
-  console.log(req.body.password);
+
   passwordChecker.checkPassword(req.body.user, req.body.password, cb);
   // passwordChecker.addUser(req.body.0user, req.body.password);
 });
