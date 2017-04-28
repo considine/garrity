@@ -1,9 +1,113 @@
 var clicking = false;
-var screenSize = getScreenWidth();
-var sizes = ["xs", "sm", "md", "lg"];
+
 var posArray = {};
-var done = false;
-// todo: replace ugly  class references with some json map at the beginning
+var articleTypes;
+var orderArray = [];
+var posAndArticleArray = {};
+var currentCont;
+var currentSize;
+var classNames;
+var currentConfig;
+var bgimage;
+var contentid;
+
+
+function injectVars (ArticleTypes, OrderArray, Classnames, Css, bgimg, contentId) {
+    bgimage = bgimg;
+    contentid = contentId;
+    console.log(contentid + "From image-render")
+    $('.image-holder').css("background-image", 'url(' + bgimg + ')');
+    
+    classNames = Classnames;
+    var style = document.createElement('style')
+    style.type = 'text/css'
+    style.innerHTML = Css;
+    document.getElementsByTagName('head')[0].appendChild(style)
+    console.log(JSON.stringify(Css));
+
+    articleTypes = ArticleTypes;
+    orderArray = OrderArray;
+    var posA = {};
+    for (var key in articleTypes) {
+        posA[key] = {};
+        if (articleTypes.hasOwnProperty(key)) {
+            for (var i=0; i<articleTypes[key].length; i++) {
+                posA[key][articleTypes[key][i]] = getObj();
+                
+            }
+        }
+    }
+    posAndArticleArray = posA;
+
+
+    for (var key in orderArray[0]) {
+        if (orderArray[0].hasOwnProperty(key)) {
+            currentCont = key;
+            currentSize = orderArray[0][key];
+        }
+    }
+   
+
+    currentConfig  = posAndArticleArray[currentCont][currentSize];
+    
+    setScreenParams();
+
+    setMinBackgroundParams();
+    // setScreenParams();
+
+    posArray["imgName"] = getImageFile();
+    $('#next-image').click(function () {
+       nextImage();
+        
+    });
+    $('.image-holder').mousemove(function(){
+        if(clicking == false) return;
+
+        currentConfig["posX"] =  event.offsetX -  currentConfig["startX"];
+
+        currentConfig["posY"] =  event.offsetY - currentConfig["startY"];
+      
+        setScreenParams();
+      
+    });
+    $(".zoom-out-button").click(function () {
+
+
+        var increment = 100;
+        currentConfig["bgWidth"] += increment;
+        
+       setScreenParams();
+    });
+
+    $('.image-holder').mousedown(function(e){
+        clicking = true;
+        // alert(screenSize);
+        currentConfig["startX"] = e.offsetX - currentConfig["lastX"];
+        currentConfig["startY"] = parseInt(e.offsetY) - parseInt(currentConfig["lastY"]);
+    });
+
+    $("#take-defaults").click(function() {
+        centerRest();
+    });
+    $(".zoom-in-button").click(function () {
+   var increment = 100;
+    
+    checkDimensions(increment);
+        updateScreenAndCatch();
+    });
+    $( window ).resize(function() {
+        setMinBackgroundParams();
+    });
+
+    $(document).mouseup(function(e){
+        if(clicking == false) return;
+        clicking = false;
+
+        updateScreenAndCatch();
+    })
+
+}
+
 function nextImage () {
     // block on set perc, then do the rest
     // via ugly callback
@@ -11,6 +115,7 @@ function nextImage () {
     setPerc (function () {
         $('.image-holder-wrapper-' + currentCont + "-" + currentSize).css('display', "none");
         if (getNextConfiguration()) {
+
             $('.image-holder-wrapper-' + currentCont + "-" + currentSize).css('display', "block");
             console.log('.image-holder-wrapper-' + currentCont + "-" + currentSize);
             currentConfig["posX"] = 0;
@@ -31,20 +136,13 @@ function centerRest () {
     while (getNextConfiguration()) {
         setGo();
     }
-
-    console.log("DONE");
     saveIMG();
-    done = true;
-    
-
-    
+    done = true;    
     function setGo () {
-        console.log("SET GO!");
         currentConfig["bgWidth"] = "cover";
         currentConfig["posX"] = "center";
         currentConfig["posY"] = "center";
     }
-
 }
 
 
@@ -78,8 +176,8 @@ function setPerc (fun) {
         }
         // now set the percentages of the background
         currentConfig["bgWidth"] = (100 * currentConfig["bgWidth"] / $("#" + currentCont + "-"  +currentSize).width()) + "%";
-        posAndArticleArray["height"] = h;
-        posAndArticleArray["width"] = w;
+        // posAndArticleArray["height"] = h;
+        // posAndArticleArray["width"] = w;
         currentConfig["bgPerc"] = percX + "% " + percY + "%";
         fun(); 
     });
@@ -119,30 +217,6 @@ function getBackgroundSrc () {
 
 
 
-var articleTypes = {"main" : ["lg", "md", "sm", "xs"], "scnd" : ["lg", "md", "sm", "xs"], "third" : ["xs"]};
-// so we know whats next
-var orderArray = [];
-for (var key in articleTypes) {
-    if (articleTypes.hasOwnProperty(key)) {
-        for (var i=0; i<articleTypes[key].length; i++) {
-            var val =articleTypes[key][i];
-            var tm = {};
-            tm[key] = val;
-            orderArray.push(tm);  
-        }
-    }
-}
-getObj();
-var posAndArticleArray = {};
-for (var key in articleTypes) {
-    posAndArticleArray[key] = {};
-    if (articleTypes.hasOwnProperty(key)) {
-        for (var i=0; i<articleTypes[key].length; i++) {
-            posAndArticleArray[key][articleTypes[key][i]] = getObj();
-            
-        }
-    }
-}
 function getNextConfiguration () {
     // first try within this article type
     for (var i=0; i<orderArray.length-1; i++) {
@@ -160,23 +234,7 @@ function getNextConfiguration () {
     return false; // done
 }
 
-$('#next-image').click(nextImage);
-var currentCont = "main";
-var currentSize = "lg";
-var currentConfig  = posAndArticleArray[currentCont][currentSize];
-setScreenParams();
-$('#' + currentCont + "-" + "md").css("background-size", posAndArticleArray[currentCont]["md"]["bgWidth"] + "px");    
 
-setMinBackgroundParams();
-// setScreenParams();
-posArray["imgName"] = getImageFile();
-
-$('.image-holder').mousedown(function(e){
-    clicking = true;
-    // alert(screenSize);
-    currentConfig["startX"] = e.offsetX - currentConfig["lastX"];
-    currentConfig["startY"] = parseInt(e.offsetY) - parseInt(currentConfig["lastY"]);
-});
 
 function updateScreenAndCatch () {
     
@@ -208,38 +266,7 @@ function updateScreenAndCatch () {
     });
 }
 
-$( window ).resize(function() {
-    setMinBackgroundParams();
-});
 
-$(document).mouseup(function(e){
-    if(clicking == false) return;
-    clicking = false;
-
-    updateScreenAndCatch();
-})
-
-$('.image-holder').mousemove(function(){
-    if(clicking == false) return;
-
-    currentConfig["posX"] =  event.offsetX -  currentConfig["startX"];
-
-    currentConfig["posY"] =  event.offsetY - currentConfig["startY"];
-  
-    setScreenParams();
-  
-});
-$(".zoom-out-button").click(function () {
-
-
-    var increment;
-    if (currentSize == "sm" || currentSize == "xs")
-        increment = 50;
-    else increment = 100;
-    currentConfig["bgWidth"] += increment;
-    
-   setScreenParams();
-});
 
 function checkDimensions(increment) {
     // check height and width
@@ -271,14 +298,7 @@ function checkDimensions(increment) {
     });
 
 }
-$(".zoom-in-button").click(function () {
-   var increment;
-    if (currentSize == "sm" || currentSize == "xs")
-        increment = 50;
-    else increment = 100;
-    checkDimensions(increment);
-    updateScreenAndCatch();
-});
+
 
 
 function setScreenParams () {
@@ -291,80 +311,69 @@ function setScreenParams () {
     $('#' + currentCont + "-" + currentSize).css('background-position-y',  posYpx); 
     $('#' + currentCont + "-" + currentSize ).css("background-size", newWidth);
 }
-function getScreenWidth () {
-    var w = window.innerWidth;
-    if (w < 768) {
-        return "xs";
-    }else if (w < 970) {
-        return "sm";
-    }else if (w < 1170) {
-        return "md";
-    } else if (w >= 1170) {
-        return "lg";
-    }
-}
 
-$('.screen-size-indic').click(function () {
-    var myjson = {
-        "xsli": "xs",
-        "smli" : "sm",
-        "mdli" : "md",
-        "lgli" : "lg"
-    }
-    var sizes = {
-        "xs" : "200px",
-        "sm" : "300px",
-        "md" : "400px",
-        "lg" : "500px"
-    }
-    screenSize = myjson[$(this).attr("id")];
-    $(".image-holder").css("max-width", sizes[screenSize]);
-     $(".image-holder").css("height", sizes[screenSize] );
-    updateBar($(this).attr("id"));
-    setScreenParams();
-});
+
+// $('.screen-size-indic').click(function () {
+//     var myjson = {
+//         "xsli": "xs",
+//         "smli" : "sm",
+//         "mdli" : "md",
+//         "lgli" : "lg"
+//     }
+//     var sizes = {
+//         "xs" : "200px",
+//         "sm" : "300px",
+//         "md" : "400px",
+//         "lg" : "500px"
+//     }
+//     screenSize = myjson[$(this).attr("id")];
+//     $(".image-holder").css("max-width", sizes[screenSize]);
+//      $(".image-holder").css("height", sizes[screenSize] );
+//     updateBar($(this).attr("id"));
+//     setScreenParams();
+// });
 
 // we have startX, and background position size!
 
 
-function updateBar (barId) {
-    $('.screen-size-indic').removeClass('active');
-    $("#" + barId).addClass('active');
-}
+// function updateBar (barId) {
+//     $('.screen-size-indic').removeClass('active');
+//     $("#" + barId).addClass('active');
+// }
 
 
 function saveIMG () {
-    posAndArticleArray["img"] = getImageFile();
-    // what are minimum sizes?
-    var mins = {"xs" : "0px", "sm" : "768px", "md" : "992px", "lg" : "1200px"}
-    var css = "";
-    jQuery.each(mins, function (i, val) {
-        css += ("@media (max-width: " + val + ") {\n "  +i + "\n}\n");
-    });
-    
-    console.log(css);
-    return;
-
-
-    $.ajax({
+    var dataSave = {};
+    dataSave["config"] = posAndArticleArray;
+    dataSave["img"] = getImageFile();
+    dataSave["classNames"] = classNames;
+    dataSave["contentid"] = contentid;
+    getRatio(function (h, w) {
+        dataSave["ratio"] = h/w;
+        $.ajax({
         url: '/admin/saveimg',
         type: "POST",
         contentType: 'application/json', 
-        data : JSON.stringify(posAndArticleArray), 
+        dataType: "json",
+        data : JSON.stringify(dataSave), 
         success : function (resp) {
-            console.log(JSON.stringify(resp));
+            
             try {
                 // try to call function that will load this image into the box
                 console.log(JSON.stringify(resp));
-                setFeaturedImage(resp.id);
+                loadFeaturedImage(contentid);
             }
             catch (e) {
                 //pass
             }
             $('#myModal').modal('hide');
             
-        }
+            }
         });
+
+    });
+
+    
 
 }
 

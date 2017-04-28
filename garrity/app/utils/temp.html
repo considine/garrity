@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+  </head>
+  <body>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script> 
+  	$.get('https://notredameday.nd.edu/campaigns/boxing-club-notre-dame-mens', function (resp) {
+	var its = document.getElementsByClassName("fb-user-name");
+	for (var it=0; it<its.length; it++) {
+		console.log(its[it].innerHTML);
+	}
+  	});
+	
+
+ </script>
+  </body>
+</html>
+

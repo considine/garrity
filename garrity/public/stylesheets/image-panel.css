@@ -35,9 +35,9 @@
   margin-right: auto; }
 .myContainer .image-holder-wrapper {
   display: none; }
-.myContainer .image-holder-wrapper-main-lg {
-  display: block; }
-  .myContainer .image-holder-wrapper-main-lg .image-holder {
+/*.myContainer .image-holder-wrapper-main-lg {
+  display: block; }*/
+/*  .myContainer .image-holder-wrapper-main-lg .image-holder {
     width: 551px;
     height: 496px; }
     @media (max-width: 768px) {
@@ -99,7 +99,7 @@
   @media (max-width: 768px) {
     .myContainer .image-holder-wrapper-third-xs .image-holder {
       width: 72.5px;
-      height: 57.5px; } }
+      height: 57.5px; } }*/
 
 #step2 {
   /*display: none;*/ }

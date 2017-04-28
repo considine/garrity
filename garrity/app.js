@@ -55,7 +55,7 @@ app.get('/home', function (req, res) {
 
 app.get('/featuredImage/:id', function (req, res) {
   var id = req.params.id;
-  imageDimens.findOne({_id : req.params.id}).exec(function (err, featuredImage) {
+  imageDimens.findOne({ contentid : req.params.id}).exec(function (err, featuredImage) {
     res.send(featuredImage);
 
   });

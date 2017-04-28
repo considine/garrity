@@ -1,96 +1,26 @@
-//- extends ../layout
+extends ../layout
 
+block stylesheets
+  link(href="/stylesheets/image-panel.css" rel="stylesheet" type="text/css")
 
-//- block content
-div#step2
-  div(style="text-align: center;")
-    h3 Screen Size
-    div.post-image-configuration
-      p Adjust the image position and zoom for each container. These represent all of the picture displays that this image may use, and we want to make sure we format it properly for you. To simply center all of the images, hit "Take Defaults"
-    nav(aria-lavel="...")
-  div.myContainer
-    div.image-holder-wrapper.image-holder-wrapper-main-lg
-      h3.image-header Main article, Full Size Screen
-      div.image-holder#main-lg(style="background-image: url('/uploads/images/#{imgsrc}');")
-      ul.pager
-        li.zoom-in-button(style="cursor: pointer;")
-          a -
-        li.zoom-out-button(style="cursor: pointer;")
-          a +
-    
-    div.image-holder-wrapper.image-holder-wrapper-main-md
-      h3.image-header Main article, Medium Size Screen
-      div.image-holder#main-md(style="background-image: url('/uploads/images/#{imgsrc}');")
-      ul.pager
-        li.zoom-in-button(style="cursor: pointer;")
-          a -
-        li.zoom-out-button(style="cursor: pointer;")
-          a +
-    div.image-holder-wrapper.image-holder-wrapper-main-sm
-      h3.image-header Main article, Small Size Screen
-      div.image-holder#main-sm(style="background-image: url('/uploads/images/#{imgsrc}');")
-      ul.pager
-        li.zoom-in-button(style="cursor: pointer;")
-          a -
-        li.zoom-out-button(style="cursor: pointer;")
-          a +
-    div.image-holder-wrapper.image-holder-wrapper-main-xs
-      h3.image-header Main article, Small Size Screen
-      div.image-holder#main-xs(style="background-image: url('/uploads/images/#{imgsrc}');")
-      ul.pager
-        li.zoom-in-button(style="cursor: pointer;")
-          a -
-        li.zoom-out-button(style="cursor: pointer;")
-          a +
-    div.image-holder-wrapper.image-holder-wrapper-scnd-lg
-      h3.image-header Secondary article, Full Size Screen
-      div.image-holder#scnd-lg(style="background-image: url('/uploads/images/#{imgsrc}');")
-      ul.pager
-        li.zoom-in-button(style="cursor: pointer;")
-          a -
-        li.zoom-out-button(style="cursor: pointer;")
-          a +
-    div.image-holder-wrapper.image-holder-wrapper-scnd-md
-      h3.image-header Secondary article, Medium Size Screen
-      div.image-holder#scnd-md(style="background-image: url('/uploads/images/#{imgsrc}');")
-      ul.pager
-        li.zoom-in-button(style="cursor: pointer;")
-          a -
-        li.zoom-out-button(style="cursor: pointer;")
-          a +
-    div.image-holder-wrapper.image-holder-wrapper-scnd-sm
-      h3.image-header Secondary article, Small Size Screen
-      div.image-holder#scnd-sm(style="background-image: url('/uploads/images/#{imgsrc}');")
-      ul.pager
-        li.zoom-in-button(style="cursor: pointer;")
-          a -
-        li.zoom-out-button(style="cursor: pointer;")
-          a +
-    div.image-holder-wrapper.image-holder-wrapper-scnd-xs
-      h3.image-header Secondary article, Mobile Size Screen
-      div.image-holder#scnd-xs(style="background-image: url('/uploads/images/#{imgsrc}');")
-      ul.pager
-        li.zoom-in-button(style="cursor: pointer;")
-          a -
-        li.zoom-out-button(style="cursor: pointer;")
-          a +
-    div.image-holder-wrapper.image-holder-wrapper-third-xs
-      h3.image-header Secondary article, Mobile Size Screen
-      div.image-holder#third-xs(style="background-image: url('/uploads/images/#{imgsrc}');")
-      ul.pager
-        li.zoom-in-button(style="cursor: pointer;")
-          a -
-        li.zoom-out-button(style="cursor: pointer;")
-          a +
+block content
+  div#step2
     div(style="text-align: center;")
-      
-
-      button.btn.btn-default#next-image Next Container
-    
-
-//- block scripts
-script(src="/javascripts/image-render.js")
-
+      h3 Screen Size
+      div.post-image-configuration
+        p Adjust the image position and zoom for each container. These represent all of the picture displays that this image may use, and we want to make sure we format it properly for you. To simply center all of the images, hit "Take Defaults"
+      nav(aria-lavel="...")
+    div.myContainer(style="text-align: center;")
+        button.btn.btn-default#next-image Manually Position Next
+        button.btn.btn-default#take-defaults Take Defaults
+       
+block scripts
+  script(src="/javascripts/image-render.js")
+  script.
+    $.get("/admin/imgrend/data", function (resp) {
+      $('.myContainer').html(resp.html + $('.myContainer').html() );
+      injectVars(resp.articleTypes, resp.orderArray, resp.classnames, resp.css, '#{imgsrc}');
+    })
     //- div.myContainer
     //-   div.image-holder-wrapper
     //-     div.image-holder#image-holder(style="background-image: url('/images/#{imgsrc}');")

@@ -8,11 +8,16 @@ function initPost (id) {
 		$( ".ql-editor p" ).first().addClass("lead");
 		$("#posttitle").html(resp.title);
 
-
+		if (resp.featuredImage) {
+			$("#featuredImageContainer").css("display", "block");
+		}
 		if (resp.imageId) {
-			$.get('/featuredImage/' + resp.imageId, function (resp) {
-				$("#featuredimage").css("background-image", "url('/uploads/images/" + resp.img +"')");
-				
+			$.get('/featuredImage/' + id, function (resp) {
+				$("#featuredimage").css("background-image", "url('/uploads/images/" + resp.imgname +"')");
+				var style = document.createElement('style')
+			    style.type = 'text/css'
+			    style.innerHTML = resp.css;
+			    document.getElementsByTagName('head')[0].appendChild(style)
 
 			});
 		}

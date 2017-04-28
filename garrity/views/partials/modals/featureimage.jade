@@ -1,0 +1,21 @@
+#myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', style="width:100%; height: 100%;")
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+            h4#myModalLabel.modal-title Set Featured Image
+          .modal-body
+            div#step1
+              h3.step-header Step 1: Image Upload
+              form.image-form#image-form(method="post",enctype="multipart/form-data",action="/admin/upl")
+                input.file-upload-input#file(type="file",name="upl")
+                input(id="contentId", type="hidden", value="#{content}")
+                button.btn.btn-default#go-button(type="submit") Go
+                span#status
+            div.myContainer(style="display: none;")
+              button.btn.btn-default#next-image Manually Position Next
+              button.btn.btn-default#take-defaults Take Defaults
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+            button.btn.btn-primary(type='button', onclick="centerRest()") Take Default Sizes

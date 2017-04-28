@@ -4,9 +4,12 @@ var mime = require ('mime');
 var mongoose = require('mongoose');
 var imageDimens =  require('../models/cover-image');
 var content =  require('../models/blog-post');
-console.log(content.blog);
 var multer = require('multer');
 var blogmailer = require('../app/utils/send-mail');
+var imageRender = require('../app/utils/dimensconfig');
+var configModel = require('../models/imageconfig');
+
+
 var router = express.Router();
 var fs = require('fs');
 mongoose.connect ('mongodb://localhost/garrity', function (err) {
@@ -44,12 +47,27 @@ var upload = multer({
 
 
 router.post('/upl', multer(upload).single('upl'), function(req,res){
-	console.log(req.body); //form fields
+
+	// console.log(req.body); //form fields
 	/* example output:
 	{ title: 'abc' }
 	 */
-	
-	 res.render("admin/adminpanel-image", {imgsrc: req.file.filename});
+   res.send({"imgsrc" : req.file.filename, "contentid" : req.body.contentid});
+	 
+	 
+});
+
+
+router.get('/imgrend', function (req, res) {
+  // res.send(JSON.stringify(imageRender.getAll()["html"]));
+  res.render('admin/adminpanel-image');
+});
+
+router.get('/imgrend/data', function (req, res) { 
+  configModel.findOne({configName : "Blog"}, function (err, resp) {
+    if (err) return res.send(500, err);
+    res.send(resp);
+  });
 });
 
 
@@ -90,13 +108,35 @@ router.get('/dash/:contentType', function(req, res, next) {
 
 router.post('/saveimg', function (req, res) {
   // console.log(req.body.img);
+  var config = req.body;
+  var css = "";
+  for (var cl in config["config"]) {
+    if (config["config"].hasOwnProperty(cl)) {
+      // console.log(config["classNames"][cl]);
+      for (var size  in config["config"][cl]) {
+        if (config["config"][cl].hasOwnProperty(size)) {
+         
+          css += ("@media (min-width: " + config["classNames"][cl]["sizes"][size] + "){" + "\n");
+          css += ("\t" + config["classNames"][cl]["class"] + " {\n"); 
+          css += ("\t\tbackground-size: " +config["config"][cl][size]["bgWidth"] + ";\n");
+          css += ("\t\tbackground-position: " +config["config"][cl][size]["bgPerc"] + ";\n");
+          css += ("\t}\n}\n");
+        }
+      }
+    }
+  }
+
+  // new imageDimens({"imgname" : config["img"], "css" : css}).save(function(err, img) {
+  //   if (err) return res.send(500, err);
+  //   res.send("success");
+  // });
+
+  imageDimens.findOneAndUpdate({ contentid : config["contentid"]}, {imgname : config["img"], "css" : css, contentid : config["contentid"]}, {upsert : true, new : true}, function(err, img) {
+    if (err) res.send(err);
+    res.send({ id : img._id});
+    console.log(img._id);
+  } );
   
-  new imageDimens(req.body).save(function (e, req) {
-    console.log(e);
-    if (e==null)
-      res.send({id : req._id});
-    else res.send("error");
-  });
   
 });
 
@@ -145,6 +185,7 @@ router.put('/data/blog/:id', function (req, res) {
   content.blog.findOne({ _id : req.params.id }, function (err, blogpost) {
     blogpost.body = upd.body;
     blogpost.title = upd.title;
+    blogpost.featuredImage = upd.featuredImage;
     if (req.body.publish) {
       blogpost.published = true;
        blogpost.upToDate = true;
@@ -154,13 +195,10 @@ router.put('/data/blog/:id', function (req, res) {
       // no change
 
     }
-    
-      
-
     else {
       console.log("draft");
       blogpost.lastEdited = Date.now();
-      blogpost.upToDate = false;
+
       blogpost.lastEdited = Date.now();
     }
 

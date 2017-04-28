@@ -1,3 +1,84 @@
+var contid;
+var imgname;
+var startModal = $("#myModal .modal-body").html();
+var alerts = [ 
+	{
+	"message" : "Post Saved!",
+	"type" : "alert-success",	
+	"name" : "save_success"
+	},
+	{
+	"message" : "Post Published!",
+	"type" : "alert-success",	
+	"name" : "publish_success"
+	},
+	{
+	"message" : "Error Saving post! Email jackconsidine3@gmail.com with details to fix",
+	"type" : "alert-danger",
+	"name" : "save_error"	
+	},
+	{
+	"message" : "Error publishing post! Email jackconsidine3@gmail.com with details to fix",
+	"type" : "alert-danger",
+	"name" : "publish_error"		
+	}
+
+];
+
+function nextStep (contentid, imagesrc) {
+	$("#step1").remove();
+
+     var imgSrc = "/uploads/images/" + imagesrc;
+     var contentid = contentid;
+     $("#step1").remove();
+     $.getScript('/javascripts/image-render.js', function () {
+     	$.get("/admin/imgrend/data", function (resp) {
+	      $('.myContainer').html(resp.html + $('.myContainer').html() );
+	      $('.image-holder').css("background-image", imgSrc);
+	      $('.myContainer').css("display", "block");
+	      injectVars(resp.articleTypes, resp.orderArray, resp.classnames, resp.css, imgSrc, contentid);
+	    });
+     });
+}
+$('#image-form').submit(function(e) {
+      
+       e.preventDefault();
+
+
+       var title = "not-necessary";
+     	var contentid = $("#contentId").val();
+     $(this).ajaxSubmit({
+	       data: {contentid: contentid},
+	       contentType: 'application/json',
+	       success: function(response){
+	        nextStep (response.contentid, response.imgsrc);
+	       }
+	   });
+	     return false;
+});	
+
+
+function showMessage (name) {
+	$("#alerts div").addClass("gone");
+	$("#" + name).removeClass("gone");
+
+	setTimeout(function() {
+        $("#" + name).addClass("gone");
+    }, 3000);
+}
+
+function initAlerts () {
+	var base = '<div id = "ALERT_NAME" class="gone alert alert-dismissable ALERT_TYPE" role="alert"> ALERT_MESSAGE </div>';
+	var cont = "";
+	for (var i=0; i<alerts.length; i++) {
+		cont += base.replace("ALERT_TYPE", alerts[i]["type"]).replace("ALERT_MESSAGE", alerts[i]["message"]).replace("ALERT_NAME", alerts[i]["name"]);
+	}
+	$("#alerts").html(cont);
+}
+
+
+
+
 var editor;
 var content = {};
 function getContent(publish, cb) {
@@ -70,8 +151,10 @@ function initQuill () {
 }
 function loadFeaturedImage(id) {
 	// get image based on id
+	contid = id;
 	$.get("/featuredImage/" + id, function (resp) {
-		
+		featuredImageHelper(resp);
+		content.imageId = id;
 		refreshContent(false);
 		// setFeaturedImage(id);
 	});
@@ -121,11 +204,26 @@ $("#title-input").keyup(function () {
 // function called when featured image is saved
 function setFeaturedImage(id) {
 	$.get('/featuredImage/' + id, function (resp) {
-		console.log("/uploads/images/" + resp.img);
-		$("#featured-image").html("<img style='width : 100%;' src='" + "/uploads/images/" + resp.img +"'>");
+		
+		featuredImageHelper(resp);
 		content.imageId = id;
 		// refreshContent(false);
 	});
+}
+function updatePosition () {
+	nextStep(contid, imgname);
+	$('#myModal').modal('show');
+
+}
+
+function featuredImageHelper (resp) {
+	var htmlString = "<img style='width : 100%;' src='" + "/uploads/images/" + resp.imgname +"'>";
+		htmlString += "<a class='btn btn-default panel-button' href='#myModal', data-toggle='modal'> Change Featured Image </a>";
+		htmlString += "<button class='btn btn-default panel-button' type='button' onclick='updatePosition()'> Change Image Positioning </button>";
+		$("#featured-image").html(htmlString);
+	contid = resp._id 
+	imgname = resp.imgname;
+		
 }
 function fillEditContent (id) {
 	var post = $.get("/admin/data/blog/" + id, function (resp) {
@@ -147,7 +245,32 @@ function fillEditContent (id) {
 		}
 
 		content = resp[0];
-		
-	});
+	    var vis = content.featuredImage ? "block" : "none";
+	    $(".featured-panel-wrapper").css("display", vis);
+
+			// set check box
+			$('#panel-form :checkbox')[0].checked = content.featuredImage;
+			
+		});
 }
+
+function resetModal () {
+	// $('#myModal').modal('show');
+	// // reset the modal to the beginning
+	$("#myModal .modal-body").html(startModal);
+}
+$('#myModal').on('hidden.bs.modal', function () {
+    resetModal();
+});
+
+
+
+$('#panel-form :checkbox').change(function() {  
+    content.featuredImage = this.checked; 
+    var vis = this.checked ? "block" : "none";
+    $(".featured-panel-wrapper").css("display", vis);
+    refreshContent(false);
+});
+
+
 $("#toolbar").css("display", "block");
