@@ -1,0 +1,33 @@
+extends layout.jade
+block all 
+      
+  .form-group
+    label.col-sm-2.control-label(for='postAuthor') Author
+    |     
+    input#postAuthor.form-control(type='text', value='Garrity McOscar')
+
+
+    .panel.panel-default.featured-panel-wrapper
+      .panel-heading
+        h3.panel-title Featured Image
+      .panel-body#featured-image
+        
+        p.not-set-featured Featured Image Not Set!
+        .panel-body.btn-wrapper
+          a.btn.btn-default(href="#myModal", data-toggle="modal") Set Featured Image 
+
+    .checkbox.featured-image-bool
+      label 
+        input(type="checkbox")
+        | Use Featured Image
+    block content
+
+  .form-group.publish-button-wrapper
+block gobutton
+  //- Extend further down!
+  block publishbutton
+  
+  div#alerts
+
+  
+

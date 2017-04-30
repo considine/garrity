@@ -13,6 +13,10 @@ body {
 .panel-body.btn-wrapper {
 	padding: 8px;
 }
+.panel-body.pick-content-type {
+	padding: 8px;
+	text-align: left;
+	}
 html{
 	height: 100%;
 }
@@ -44,7 +48,7 @@ body { min-height: 100%; }
 
 
 
-.featured-panel-wrapper  {
+.featured-panel-wrapper, .which-article-wrapper  {
 	margin-left: auto;
 	margin-right: auto;
 

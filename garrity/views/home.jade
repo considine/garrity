@@ -23,45 +23,18 @@ block content
    
   .content-wrapper
     .row.myClass
-      .thumbnail-col.col-sm-2.col-xs-3(style='height: 40px;')
-         .new.center-every
-            div
-             img.new(src='images/test6.jpeg')
-       
-            div
-              h3.blog-title-thumbnail.center-text  3/27/2017 
-      .thumbnail-col.col-sm-2.col-xs-3(style='height: 40px;')
-        .new.center-every
-          div
-            img.new(src='images/test2.jpeg')
-            
-          div
-            h3.blog-title-thumbnail.center-text  3/20/2017 
-      .thumbnail-col.col-sm-2.col-xs-3(style='height: 40px;')
-        .new.center-every
-          div
-            img.new(src='images/test3.jpg')
-            
-          div
-            h3.blog-title-thumbnail.center-text  3/13/2017 
-      .thumbnail-col.col-sm-push-4.col-sm-2.col-xs-3(style='height: 40px;')
-        .new.center-every
-          div
-            img.new(src='images/moreblogposts.jpg')      
-          div
-            h3.blog-title-thumbnail.center-text  3/6/2017
-      .thumbnail-col.col-sm-pull-2.col-sm-2.col-xs-3(style='height: 40px;')
-        .new.center-every
-          div
-            img.new(src='images/test5.jpeg')       
-          div
-            h3.blog-title-thumbnail.center-text  2/28/2017 
-      .thumbnail-col.col-sm-pull-2.col-sm-2.col-xs-3(style='height: 40px;')
-        .new.center-every
-          div
-            img.new(src='images/test4.jpeg')     
-          div
-            h3.blog-title-thumbnail.center-text  TLDR; 
+      for post in posts
+        .thumbnail-col.col-sm-2.col-xs-3
+           .new.center-every
+              a(href="/blog/#{post._id}")
+                if post.imageId
+                  div(class="blog-image-holder-article-header c#{post._id}" style="padding-bottom: 78%; background-image: url('/uploads/images/#{post.imageId.imgname}');")
+                else 
+                  div(class="blog-image-holder-article-header c#{post._id}" style="padding-bottom: 78%; background-position: center; background-size: cover; background-image: url('/images/tldr.png');")
+              //-  img.new(src='images/test6.jpeg')
+         
+              div
+                h3.blog-title-thumbnail.center-text(id="post-time-#{post._id}") Hlelo
     
     .row.content-wrapper
       .col-sm-6.col-xs-12.story-1-wrapper.content-holder
@@ -113,6 +86,7 @@ block content
         img(style="width: 100%;", src="https://img.youtube.com/vi/mPtux9fl_mg/0.jpg")
       .col-sm-3.col-xs-0.video-holder
         img(style="width: 100%;", src="https://img.youtube.com/vi/JeozbHfX_tw/0.jpg")
+
   footer
     .col-sm-8.col-xs-12.text-left
       span.copyright Copyright &copy; 
@@ -124,6 +98,17 @@ block content
           a(href="#") Privacy Policy
         li
           a(href="#") Terms of Use
+
+block scripts
+  script(src="/javascripts/homeutils.js")
+  for post in posts
+    script.
+      checkDates('#{post.time}', '#{post._id}');
+    if post.imageId
+      script.
+        addStyle('#{post.imageId.css}');
+  script.
+    updateStyleSheet()
 
 
 

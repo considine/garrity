@@ -2,21 +2,37 @@ extends ../layout
 
 block content
  
- div.container
+
+ div.container  #{abrev}
   div.starter-template
    nav(aria-label="...")
     ul.pagination.pagination-sm
-     li.active.page-item
-      a.page-link.switch-bar(href="/TODO") Newsletters
-     li.page-item
-      a.page-link.switch-bar(href="/TODO") Stories
-     li.page-item
-      a.page-link.switch-bar(href="/TODO") Pages
-     li.page-item
-      a.page-link.switch-bar(href="/TODO") Widgets
+      if abbrev=="blog"
+       li.active.page-item
+        a.page-link.switch-bar(href="/admin/dash/blog_posts") Newsletters
+       li.page-item
+        a.page-link.switch-bar(href="/admin/dash/stories") Stories
+       li.page-item
+        a.page-link.switch-bar(href="/admin/dash/pages") Pages
+      else if abbrev=="story"
+        li.page-item
+          a.page-link.switch-bar(href="/admin/dash/blog_posts") Newsletters
+        li.active.page-item
+          a.page-link.switch-bar(href="/admin/dash/stories") Stories
+        li.page-item
+          a.page-link.switch-bar(href="/admin/dash/pages") Pages
+      else if abbrev=="page"
+        li.page-item
+          a.page-link.switch-bar(href="/admin/dash/blog_posts") Newsletters
+        li.page-item
+          a.page-link.switch-bar(href="/admin/dash/stories") Stories
+        li.active.page-item
+          a.page-link.switch-bar(href="/admin/dash/pages") Pages
+      li.page-item
+       a.page-link.switch-bar(href="/TODO") Widgets
    h1 Recent #{contentType}
    p
-    a(href="/admin/new-post")
+    a(href="/admin/new-#{abbrev}")
      button Add New
       i.fa.fa-plus(aria-hidden="true")
    div.container(style="max-width: 100%;")
@@ -25,7 +41,7 @@ block content
       p.text-left Search Old #{contentType}
       form.form(role="search")
        div.input-group
-        input.form-control(type="text", name="json", placeholder="search")
+        input.form-control(type="text", name="json", placeholder="CURRENTLY NOT FUNCTIONAL")
         div.input-group-btn
          button.btn.btn-default(type="submit")
           i.glyphicon.glyphicon-search
@@ -42,7 +58,7 @@ block content
           td.align-left(style="text-align: left; width: 25%;")
            a(href="#") #{thing.title}
            p
-            a(style="color: blue;", href="/admin/edit-post/#{thing._id}") Edit
+            a(style="color: blue;", href="/admin/edit-#{abbrev}/#{thing._id}") Edit
              i.fa.fa-pencil-square-o(aria-hidden="true")
             |   
             a(style="color: #ff3b2d", onclick="deletePost('#{thing._id}')" href="#") Delete
@@ -73,4 +89,5 @@ block content
 
 block scripts
   script(src='/javascripts/postUtils.js')
-
+  script.
+    initContentType('#{abbrev}')

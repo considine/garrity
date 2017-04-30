@@ -130,7 +130,6 @@ body {
 div.myClass {
   /*margin-top: 10px;*/
   padding-top: 5px;
-  padding-bottom: 5px;
   background-color: #eeeeee;
   overflow: hidden;
   white-space: nowrap;
@@ -144,8 +143,7 @@ div.myClass [class*="col"] {
 
 .thumbnail-col {
   padding: 1px;
-  padding-top: 5px;
-  padding-bottom: 5px; }
+  padding-top: 5px; }
 
 .new {
   width: 100%; }

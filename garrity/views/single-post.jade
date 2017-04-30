@@ -10,7 +10,7 @@ block content
   .container
     if admin
       div(style="text-align: center; margin-top: 16px;")
-        a(href="/admin/edit-post/#{postid}", style="text-align: center; margin-top: 16px;")
+        a(href="/admin/edit-#{contype}/#{postid}", style="text-align: center; margin-top: 16px;")
           div
             i.glyphicon.glyphicon-edit(aria-hidden="true")
             |  Edit Post
@@ -82,7 +82,7 @@ block content
 block scripts
     script(src="/javascripts/loadPost.js")
     script.
-        initPost('#{postid}')
+        initPost('#{postid}', '#{contype}')
 
 
 //- form.form(role="search")

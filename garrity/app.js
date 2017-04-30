@@ -8,7 +8,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var crypto = require ('crypto');
 var content  = require('./models/blog-post');
-var blogpost = content.blog;
+
 var mime = require ('mime');
 var mongoose = require('mongoose');
 var passwordChecker = require("./app/utils/getpassword");
@@ -34,20 +34,11 @@ app.use(session({
 }));
 
 app.get('/home', function (req, res) {
-  imageDimens.findOne({_id : "58f9abd5f56c4776cd08d84e"}).exec(function (err, dimens) {
-    if (err)  console.log(err);
-    res.render('home', {
-      mainimg :  "/uploads/images/" + dimens.img,
-      secondimg1 : "/uploads/images/" + dimens.img,
-      lgStyle : styler.styleLg(dimens),
-      mdStyle : styler.styleMd(dimens),
-      smStyle : styler.styleSm(dimens),
-      xsStyle : styler.styleXs(dimens),
-      secondimg2 : "/uploads/images/" + dimens.img,
-      coverCss : styler.coverQuery(dimens)
-    });
-    // 'athletes' contains the list of athletes that match the criteria.
+  content.blog.find({"published" : true}).populate('imageId').sort({'time': -1}).limit(5).exec(function (err, posts) {
+    if (err) res.send(500, err);
+      res.render("home", {"posts" : posts});
   });
+
   
 });
 
@@ -55,25 +46,59 @@ app.get('/home', function (req, res) {
 
 app.get('/featuredImage/:id', function (req, res) {
   var id = req.params.id;
-  imageDimens.findOne({ contentid : req.params.id}).exec(function (err, featuredImage) {
+  imageDimens.findOne({ _id : req.params.id}).exec(function (err, featuredImage) {
     res.send(featuredImage);
 
   });
 });
 
 
-app.get('/post/:id', function (req, res) {
+app.get('/blog/:id', function (req, res) {
   // todo: IF SESSION
   var admin = false;
   if (true) var admin = true; 
-  res.render('single-post', {postid : req.params.id, admin : admin});
+  res.render('single-post', {postid : req.params.id, admin : admin, contype : "blog"});
   
 });
-app.get("/postcontent/:id", function (req, res){
-  blogpost.findOne({_id : req.params.id}).exec(function (err, post) {
+app.get("/blogcontent/:id", function (req, res){
+  content.blog.findOne({_id : req.params.id}).exec(function (err, post) {
    res.send(post);
   });
 });
+// todo clean up
+app.get('/story/:id', function (req, res) {
+  // todo: IF SESSION
+  var admin = false;
+  if (true) var admin = true; 
+  res.render('single-post', {postid : req.params.id, admin : admin, contype : "story"});
+  
+});
+
+app.get('/page/:id', function (req, res) {
+  var admin = false;
+  if (true) var admin = true;
+  res.render('single-post', {postid : req.params.id, admin : admin, contype : "page"})
+});
+
+app.get("/storycontent/:id", function (req, res){
+  content.article.findOne({_id : req.params.id}).exec(function (err, post) {
+   res.send(post);
+  });
+});
+app.get("/pagecontent/:id", function (req, res){
+  content.page.findOne({_id : req.params.id}).exec(function (err, post) {
+   res.send(post);
+  });
+});
+
+
+
+
+
+
+
+
+
 
  var auth = function(req, res, next) {
   return next();

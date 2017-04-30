@@ -1,0 +1,32 @@
+extends content-base
+block content
+  .panel.panel-default.which-article-wrapper.featured-panel-wrapper
+        .panel-heading
+          h3.panel-title Where would you like to feature this article?
+        .panel-body.pick-content-type
+           .radio
+             label(for="bump-content-radio")
+               input#bump-content-radio(type='radio', name='articleLocation', value='bump', checked='')
+               |     Bump all (this goes to main, main goes to second)
+           .radio
+             label(for="main-content-radio")
+               input#main-content-radio(type='radio', name='articleLocation', value='main')
+               |     Main Article
+           .radio
+             label(for="s1-content-radio") 
+                input#s1-content-radio(type='radio', name='articleLocation', value='s1')
+                |  Second Article 1  
+           .radio
+             label(for="s2-content-radio")
+               input#s2-content-radio(type='radio', name='articleLocation', value='s2')
+               |     Second Article 2
+             .radio
+             label(for="s3-content-radio")
+               input#s3-content-radio(type='radio', name='articleLocation', value='th')
+               |     Featured Content
+           .radio
+             label(for="none-content-radio")
+               input#none-content-radio(type='radio', name='articleLocation', value='none')
+               |     Not front Page
+block publishbutton
+  button.btn.btn-default.publish.publish-btn-sidebar(onclick="setArticleType(true)" type="button", disabled="") Publish!

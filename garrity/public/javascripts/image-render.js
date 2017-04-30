@@ -361,7 +361,7 @@ function saveIMG () {
             try {
                 // try to call function that will load this image into the box
                 console.log(JSON.stringify(resp));
-                loadFeaturedImage(contentid);
+                loadFeaturedImage(resp.id);
             }
             catch (e) {
                 //pass

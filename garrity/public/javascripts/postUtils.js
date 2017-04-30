@@ -1,5 +1,7 @@
 var contid;
 var imgname;
+var conttype;
+var CONTID;
 var startModal = $("#myModal .modal-body").html();
 var alerts = [ 
 	{
@@ -21,6 +23,11 @@ var alerts = [
 	"message" : "Error publishing post! Email jackconsidine3@gmail.com with details to fix",
 	"type" : "alert-danger",
 	"name" : "publish_error"		
+	},
+	{
+	"message" : "Nothing changed!",
+	"type" : "alert-info",
+	"name" : "nothing_changed"		
 	}
 
 ];
@@ -32,11 +39,11 @@ function nextStep (contentid, imagesrc) {
      var contentid = contentid;
      $("#step1").remove();
      $.getScript('/javascripts/image-render.js', function () {
-     	$.get("/admin/imgrend/data", function (resp) {
+     	$.get("/admin/imgrend/data/" + conttype, function (resp) {
 	      $('.myContainer').html(resp.html + $('.myContainer').html() );
 	      $('.image-holder').css("background-image", imgSrc);
 	      $('.myContainer').css("display", "block");
-	      injectVars(resp.articleTypes, resp.orderArray, resp.classnames, resp.css, imgSrc, contentid);
+	      injectVars(resp.articleTypes, resp.orderArray, resp.classnames, resp.css, imgSrc, CONTID);
 	    });
      });
 }
@@ -51,7 +58,8 @@ $('#image-form').submit(function(e) {
 	       data: {contentid: contentid},
 	       contentType: 'application/json',
 	       success: function(response){
-	        nextStep (response.contentid, response.imgsrc);
+	       	console.log("The contid is " + CONTID);
+	        nextStep (CONTID, response.imgsrc);
 	       }
 	   });
 	     return false;
@@ -77,7 +85,11 @@ function initAlerts () {
 }
 
 
+function setArticleType (publish) {
+	content.frontpageStatus = $('.panel-body.pick-content-type input:checked').val();
 
+	refreshContent(publish);
+}
 
 var editor;
 var content = {};
@@ -121,7 +133,7 @@ function getContent(publish, cb) {
 function deletePost (id) {
 	$.ajax ({
 		type: "DELETE",
-		url : "/admin/data/blog/" + id,
+		url : "/admin/data/" + conttype + "/" + id,
 		success : function (resp) {
 			$("#" + id).remove();
 			console.log(resp);
@@ -151,10 +163,13 @@ function initQuill () {
 }
 function loadFeaturedImage(id) {
 	// get image based on id
-	contid = id;
+	$('.publish-btn-sidebar').prop('disabled', false);
+	content.imageId = id;
+	console.log("from load, id is " + id);
 	$.get("/featuredImage/" + id, function (resp) {
+		contid = resp.contentid;
 		featuredImageHelper(resp);
-		content.imageId = id;
+		
 		refreshContent(false);
 		// setFeaturedImage(id);
 	});
@@ -162,20 +177,23 @@ function loadFeaturedImage(id) {
 }
 function refreshContent (publish) {
 	function cb () {
+		content["published"] = publish;
 		$.ajax ({
-			url: '/admin/data/blog/' + content._id,
+			url: '/admin/data/' + conttype + '/' + content._id,
 			dataType: "json",
 			contentType: "application/json; charset=utf-8",  
 			type : 'PUT',
 			data: JSON.stringify(content), 
 			success : function(data) {
 				console.log("FROM SUCCESS");
-				try {
-					publish ? showMessage("publish_success") : showMessage("save_success");
-				} catch (err) {
-					//pass
-					console.log(err);
+				// no request error, but already exists
+
+				if (!data.success) {
+					showMessage('nothing_changed');
+					return;
 				}
+				publish ? showMessage("publish_success") : showMessage("save_success");
+				
 				
 			},
 			error : function (err) {
@@ -211,7 +229,7 @@ function setFeaturedImage(id) {
 	});
 }
 function updatePosition () {
-	nextStep(contid, imgname);
+	nextStep(CONTID, imgname);
 	$('#myModal').modal('show');
 
 }
@@ -225,32 +243,51 @@ function featuredImageHelper (resp) {
 	imgname = resp.imgname;
 		
 }
+function initContentType(contType) {
+	conttype = contType;
+	console.log(conttype);
+}
 function fillEditContent (id) {
-	var post = $.get("/admin/data/blog/" + id, function (resp) {
-		var body = resp.text;
 
-		if (resp[0].text) {
-			editor.setContents(JSON.parse(resp[0].text));
-		}
-		console.log(resp[0]);
-		if (resp[0].imageId) {
-			
-			setFeaturedImage(resp[0].imageId);
-		}
-		if (resp[0].title) {
-			$("#title-input").val(resp[0].title);
-		}
-		if (resp[0].author) {
-			$('#postAuthor').val(resp[0].author);
-		}
+	var post = $.ajax({
+		type: 'GET',
+		url :  "/admin/data/" + conttype +  "/" + id, 
 
-		content = resp[0];
-	    var vis = content.featuredImage ? "block" : "none";
-	    $(".featured-panel-wrapper").css("display", vis);
+		success : function (resp, xhr, status) {
 
-			// set check box
-			$('#panel-form :checkbox')[0].checked = content.featuredImage;
-			
+			var body = resp.text;
+
+			if (resp[0].text) {
+				editor.setContents(JSON.parse(resp[0].text));
+			}
+			console.log(resp[0]);
+			if (resp[0].imageId) {
+				
+				setFeaturedImage(resp[0].imageId);
+			}
+			if (resp[0].title) {
+				$("#title-input").val(resp[0].title);
+			}
+			if (resp[0].author) {
+				$('#postAuthor').val(resp[0].author);
+			}
+			CONTID = resp[0]._id;
+			content = resp[0];
+		    var vis = content.featuredImage ? "block" : "none";
+
+		    $(".featured-panel-wrapper").css("display", vis);
+
+				// set check box
+				
+				$('#panel-form :checkbox')[0].checked = content.featuredImage;
+
+				 $('.publish-btn-sidebar').prop('disabled', !content.featuredImage || !content.imageId);
+			},
+		complete : function (resp) {
+			if (resp.status == 404) {
+			$('body').html(resp.responseText);
+			}
+		}
 		});
 }
 
@@ -269,6 +306,8 @@ $('#panel-form :checkbox').change(function() {
     content.featuredImage = this.checked; 
     var vis = this.checked ? "block" : "none";
     $(".featured-panel-wrapper").css("display", vis);
+    if (content.imageId)
+    	$('.publish-btn-sidebar').prop('disabled', !this.checked);
     refreshContent(false);
 });
 
