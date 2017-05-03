@@ -5,21 +5,13 @@ block stylesheets
   link(href="/stylesheets/home.css" rel="stylesheet" type="text/css")
   link(href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
   script(src="https://use.fontawesome.com/63edd0bcb2.js")  
+
 block content
-  style.
-    #{coverCss}
-    @media (max-width: 768px) {
-      #{xsStyle}
-    }
-    @media (min-width: 768px) {
-      #{smStyle}
-    }
-    @media (min-width: 992px) {
-      #{mdStyle}
-    }
-    @media (min-width: 1200px) {
-      #{lgStyle}
-    }
+  for article in articles
+    style.
+        #{article.imageId.css}'
+  
+    
    
   .content-wrapper
     .row.myClass
@@ -38,15 +30,17 @@ block content
     
     .row.content-wrapper
       .col-sm-6.col-xs-12.story-1-wrapper.content-holder
-        .main-content-thumbnail.story-1(style="background-image: url('#{mainimg}');")
-          h1.content-header  Main Story    
+        a(href="/story/#{articles[0]._id}")
+          div(class="main-content-thumbnail story-1 c#{articles[0]._id}")
+            h1.content-header  #{articles[0].title}
       .col-sm-6.col-xs-12.nested-content-holder.secondary-content-holder
         .row.nested-content-row
-          .col-sm-12.col-xs-6.nested-content-col.main-content-2.content-holder.secondary-content(style="background-image: url('#{secondimg1}')")
-            h3.content-header  Secondary Story 
-               
-          .col-sm-12.col-xs-6.nested-content-col.main-content-3.content-holder.secondary-content(style="background-image: url('#{secondimg2}')")
-            h3.content-header  Secondary Story 
+          a(href="/story/#{articles[1]._id}")
+            div(class="col-sm-12 col-xs-6 nested-content-col main-content-2 content-holder secondary-content c#{articles[1]._id}" )
+              h3.content-header  #{articles[1].title}
+          a(href="/story/#{articles[2]._id}")   
+            div(class="col-sm-12 col-xs-6 nested-content-col main-content-2 content-holder secondary-content  c#{articles[2]._id}" )
+              h3.content-header  #{articles[2].title}
     .secondary-content-header
       h2 OTHER CONTENT
     .row.bottom-content
@@ -75,18 +69,19 @@ block content
             li.list-group-item Cras Justo Odio
             li.list-group-item Cras Justo Odio
             li.list-group-item Cras Justo Odio
-    .secondary-content-header.col-xs-0
-      h2.col-xs-0 WATCH 
-    .row.video-gallery
-      .col-sm-3.col-xs-0.video-holder
-        img(style="width: 100%;", src="https://img.youtube.com/vi/JeozbHfX_tw/0.jpg")
-      .col-sm-3.col-xs-0.video-holder
-        img(style="width: 100%;", src="https://img.youtube.com/vi/onai-Fw5RZY/0.jpg")
-      .col-sm-3.col-xs-0.video-holder
-        img(style="width: 100%;", src="https://img.youtube.com/vi/mPtux9fl_mg/0.jpg")
-      .col-sm-3.col-xs-0.video-holder
-        img(style="width: 100%;", src="https://img.youtube.com/vi/JeozbHfX_tw/0.jpg")
-
+    //- .secondary-content-header.col-xs-0
+    //-   h2.col-xs-0 WATCH 
+    //- .row.video-gallery
+    //-   .col-sm-3.col-xs-0.video-holder
+    //-     img(style="width: 100%;", src="https://img.youtube.com/vi/JeozbHfX_tw/0.jpg")
+    //-   .col-sm-3.col-xs-0.video-holder
+    //-     img(style="width: 100%;", src="https://img.youtube.com/vi/onai-Fw5RZY/0.jpg")
+    //-   .col-sm-3.col-xs-0.video-holder
+    //-     img(style="width: 100%;", src="https://img.youtube.com/vi/mPtux9fl_mg/0.jpg")
+    //-   .col-sm-3.col-xs-0.video-holder
+    //-     img(style="width: 100%;", src="https://img.youtube.com/vi/JeozbHfX_tw/0.jpg")
+  .sound-cloud-holder(style = "text-align: center;")
+    iframe(width="80%" height="100"  style="min-width: 350px;" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/319182695&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true")
   footer
     .col-sm-8.col-xs-12.text-left
       span.copyright Copyright &copy; 
@@ -107,6 +102,9 @@ block scripts
     if post.imageId
       script.
         addStyle('#{post.imageId.css}');
+  //- for article in articles
+  //-   script.
+  //-       addStyle('#{article.imageId.css}');
   script.
     updateStyleSheet()
 

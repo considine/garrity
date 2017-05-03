@@ -7,51 +7,56 @@ function dimensObj () {
 		
 		'.main-content-thumbnail.story-1' : {
 			"lg" : {
-				w : 551, h : 496, mw : "1200px"
+				w : 551, h : 496, mw : "1000000px"
 			},
 			"md" : {
-				w : 551, h : 396, mw : "992px"
+				w : 551, h : 396, mw : "1200px"
 			},
 			"sm" : {
-				w : 470, h : 296, mw : "768px"
+				w : 470, h : 296, mw : "992px"
 			},
 			"xs" : {
-				w : 741, h : 196, mw : "0px"
+				w : 741, h : 196, mw : "768px"
 			}
 		},
 		
 		'.secondary-content' : {
 			"lg" : {
-				w : 555, h : 250 , mw : "1200px"
+				w : 555, h : 250 , mw : "10000000px"
 			},
 			"md" : {
-				w : 555, h : 200, mw : "992px"
+				w : 555, h : 200, mw : "1200px"
 			},
 			"sm" : {
-				w : 495, h : 150, mw : "768px"
+				w : 495, h : 150, mw : "992px"
 			},
 			"xs" : {
-				w : 382, h : 200, mw : "0px"
+				w : 382, h : 200, mw : "768px"
 			}
-		} 
+		} ,
+		'.blog-image-holder' : {
+			"lg" : {
+				w : 690, h : 230, mw : "10000000px"
+			}
+		}, 
 	};
 	var blogConfig = {
 		
 		'.blog-image-holder' : {
 			"lg" : {
-				w : 690, h : 230, mw : "0px"
+				w : 690, h : 230, mw : "10000000px"
 			}
 		}, 
 		'.blog-image-holder-article-header' : {
 			"lg" : {
-				w : 160, h : 128, mw : "0px"
+				w : 160, h : 128, mw : "1000000px"
 			}
 			
 		} 
 	};
 
-	this.configName = configNameBlog;
-	this.config = blogConfig;
+	this.configName = blogConfig;
+	this.config = testConfig;
 
 	function getClassAndMwArray (config) {
 		var retArray = {};
@@ -253,9 +258,9 @@ function dimensObj () {
 
 
 var d = new dimensObj();
-// // // var s = {};
+// // // // var s = {};
 // var all =d.getAll();
-// all["configName"] = "Blog";
+// all["configName"] = "Article";
 
 // new configModel(all).save(function (err, dimens) {
 // 	console.log("saved");

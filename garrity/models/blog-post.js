@@ -41,7 +41,7 @@ var bextras = {
 */
 var aextras = {
 	// either Main, Secondary1, Secondary2, Third, Or none
-	frontpageStatus : {type : String, default : "none"}
+	frontpageStatus : {type : Number, default : -1}
 };
 /*
 	The attributes that pages use, only

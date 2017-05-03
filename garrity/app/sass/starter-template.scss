@@ -320,57 +320,9 @@ div.myClass [class*="col"] /* TWBS v3 */
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 	vertical-align: text-bottom;
 }
-.main-content-thumbnail.story-1 {
-	background-image: linear-gradient( rgba(20,20,20, .6), rgba(20,20,20, .6)), url(../assets/bg.jpg);
-	background-color: white;
-	cursor: pointer;
-}
-
-.main-content-thumbnail.story-1:hover {
-	background-image: linear-gradient( rgba(20,20,20, .1), rgba(20,20,20, .1)), url(../assets/bg.jpg);
-	background-color: white;
-	cursor: pointer;
-}
 
 
 
-@media (max-width: 768px) {
-.main-content.story-1 {
-	background-image: linear-gradient( rgba(20,20,20, .1), rgba(20,20,20, .1)), url(../assets/bg.jpg);
-	background-color: white;
-	cursor: pointer;
-}
-
-
-}
-
-
-.nested-content-col.main-content-2 {
-
-	background-image: linear-gradient( rgba(20,20,20, .6), rgba(20,20,20, .6)), url(../assets/main-article2.jpg);  background-size:     cover;   background-repeat:   no-repeat;background-position: center top;
-	background-color: white;
-	cursor: pointer;
-}
-
-.nested-content-col.main-content-2:hover {
-	background-image: linear-gradient( rgba(20,20,20, .1), rgba(20,20,20, .1)), url(../assets/main-article2.jpg);  background-size:     cover;   background-repeat:   no-repeat;background-position: center top;
-	background-color: white;
-	cursor: pointer;
-}
-
-
-.nested-content-col.main-content-3 {
-
-	background-image: linear-gradient( rgba(20,20,20, .6), rgba(20,20,20, .6)), url(../assets/cm.jpg);  background-size:     cover;   background-repeat:   no-repeat;background-position: center top;
-	background-color: white;
-	cursor: pointer;
-}
-
-.nested-content-col.main-content-3:hover {
-	background-image: linear-gradient( rgba(20,20,20, .1), rgba(20,20,20, .1)), url(../assets/cm.jpg);  background-size:     cover;   background-repeat:   no-repeat;background-position: center top;
-	background-color: white;
-	cursor: pointer;
-}
 
 a {font-family: inherit;
     font-weight: 500;

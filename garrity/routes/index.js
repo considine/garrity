@@ -8,6 +8,7 @@ var multer = require('multer');
 var blogmailer = require('../app/utils/send-mail');
 var imageRender = require('../app/utils/dimensconfig');
 var configModel = require('../models/imageconfig');
+var soundCloudChecker = require('../app/utils/checksoundtrack');
 var storyContent = "story";
 var blogContent = "blog";
 var pageContent = "page";
@@ -158,22 +159,29 @@ router.post('/saveimg', function (req, res) {
   var config = req.body;
 
     var css = "";
+    var cssIt = {};
     for (var cl in config["config"]) {
       if (config["config"].hasOwnProperty(cl)) {
         // console.log(config["classNames"][cl]);
         for (var size  in config["config"][cl]) {
           if (config["config"][cl].hasOwnProperty(size)) {
-           
-            css += ("@media (min-width: " + config["classNames"][cl]["sizes"][size] + "){" + "");
+          
+            css += ("@media (max-width: " + config["classNames"][cl]["sizes"][size] + "){" + "");
             css += ("" + config["classNames"][cl]["class"] + ".c" + config["contentid"] +" {"); 
             css += ("background-size: " +config["config"][cl][size]["bgWidth"] + ";");
             css += ("background-position: " +config["config"][cl][size]["bgPerc"] + ";");
-            css += ("}}");
+            css += ("background-image:  linear-gradient( rgba(20,20,20, .6), rgba(20,20,20, .6)),  url('/uploads/images/" + config["img"] + "');}");
+            css += ("" + config["classNames"][cl]["class"] + ".c" + config["contentid"] +":hover {");
+            css += ("background-image:  linear-gradient( rgba(20,20,20, .2), rgba(20,20,20, .2)),  url('/uploads/images/" +  config["img"] + "');");
+            css += ("background-size: " +config["config"][cl][size]["bgWidth"] + ";");
+            css += ("background-position: " +config["config"][cl][size]["bgPerc"] + ";}");
+            css += ("}");
+            
           }
         }
       }
     }
-    css = css.replace("\n", "");
+    
 
   
   // new imageDimens({"imgname" : config["img"], "css" : css}).save(function(err, img) {
@@ -194,36 +202,7 @@ router.post('/saveimg', function (req, res) {
 
 
 
-router.post('/data/:content_type', function (req, res, next) {
-  var cont;
-  if (req.params.content_type == blogContent) cont = content.blog;
-  else if (req.params.content_type == storyContent) cont = content.article;
-  else return next("route");
-   function func() {
-      var sjson = {};
-      sjson["text"] = req.body.text;
-      sjson["body"] = req.body.body;
-      sjson["author"] = req.body.author;
 
-      if (!sjson["text"] || !sjson["body"] || !sjson["author"]) {
-        res.send(400, "attributes not set properly")
-      }
-     
-      for (var i=0; i<req.body.imgs.length; i++) {
-        
-        sjson["body"] = sjson["body"].replace(req.body.imgs[i],"http://localhost:8000/uploads/emailImages/" + req.body.imgs[i]);
-        sjson["text"] = sjson["text"].replace(req.body.imgs[i],"http://localhost:8000/uploads/emailImages/" + req.body.imgs[i]);
-      }
-      sjson["title"] = req.body.subject;
-      new cont(sjson).save(function (e, req) {
-      if (e==null)
-        console.log('item saved');
-      else console.log("error");
-      });
-    }
-    func();
-    // blogmailer.send(req.body, func);
-});
 
 function saveContent(cont, req, res, cb) {
 
@@ -272,62 +251,45 @@ function saveContent(cont, req, res, cb) {
 }
 
 function setBump (fp, paramsId) {
-  console.log("called2");
-  var bumpType = fp;
-  if (bumpType == 'none') {
-     return;
+  // increment all, and set the one with paramsId to 1
+  if (fp=="bump") {
+    var conditions = { frontpageStatus : { $gte : 0 } },
+    update = { $inc: { frontpageStatus: 1 }};
+
+
+    content.article.update(conditions, update, {multi: true}).exec(function(err) {
+      if (err) console.log(err);
+      content.article.findOneAndUpdate({_id : paramsId}, { frontpageStatus : 0}, function (err) {
+        "updated them all!!";
+      } );
+    });
   }
-  else if (bumpType == 'main' || bumpType == "s1" || bumpType == 's2' || bumpType == 'th') {
-    // todo fix
-    
-    content.article.findOne({ _id : {$ne  : paramsId }, frontpageStatus : bumpType}, function (err, article) {
-        if (!article) return;
-        article.frontpageStatus = "none";
-        console.log("hi");
-        article.save(function(err) {
-          if (err) console.log(err);
-          
-        });
+  else if (fp=='-1') {
+    content.article.update( {frontpageStatus : parseInt(fp)}, {frontpageStatus : -1}, function (err) {
+      if (err) return console.log(err);
+      content.article.update({_id : paramsId}, {frontpageStatus : parseInt(fp)}, function(err) {
+          if (err) return console.log(err);
+          else console.log("Success");
       });
-    content.article.findOneAndUpdate({ _id : paramsId}, {frontpageStatus : bumpType}, function (err, post) {
-            if (err) console.log(err);
-            else console.log("Success!");
-          })
-  }
-  else if (bumpType == "bump") {
-
-
-    var order = ['bump', 'main', 's1', 's2', 'th', 'th'];
-    // if there is none of an item simply make this that ite
-
-    var transition = {};
-
-
-    for (var i=order.length-1; i>0; i--) {
-      transition[order[i-1]] = order[i];
-    }
-    console.log(JSON.stringify(transition));
-    content.article.find({$or : [{ frontpageStatus : { $ne : 'none'}}, {_id : paramsId}]}, function (err, articles) {
-      for (var i=0; i<articles.length; i++) {
-          if (articles[i]._id == paramsId) {
-            articles[i].frontpageStatus = "main";
-            console.log("in loop");
-            continue;
-          }
-          console.log(articles[i].frontpageStatus + ", " + transition[articles[i].frontpageStatus]);
-          articles[i].frontpageStatus = transition[articles[i].frontpageStatus];
-          articles[i].save(function (err) {
-            if (err) console.log("err saving!" + err);
-          });
-      }
-    } );
-
-   
+    });
   }
 
 }
 
+
+
 var crudApi = express.Router();
+// crudApi.post('/' + blogContent, function (req, res) {
+ 
+// });
+// crudApi.post('/' + storyContent, function (req, res) {
+
+// });
+// crudApi.post('/' + pageContent, function (req, res) {
+
+// });
+
+
 crudApi.put('/' + blogContent + "/:id", function (req, res) {
   saveContent(content.blog, req, res);
 });
@@ -388,6 +350,7 @@ crudApi.get('/' + storyContent + "/:id", function (req, res) {
       }
    });
 });
+
 router.use('/data', crudApi);
 
 
@@ -434,6 +397,10 @@ router.get('/edit-'+ pageContent +'/:id', function(req, res) {
 
 
 
+router.post('/soundcloud', function (req, res) {
+  var url = req.body.url;
+  soundCloudChecker(url, res);
+});
 
 
 

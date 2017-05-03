@@ -36,7 +36,9 @@ app.use(session({
 app.get('/home', function (req, res) {
   content.blog.find({"published" : true}).populate('imageId').sort({'time': -1}).limit(5).exec(function (err, posts) {
     if (err) res.send(500, err);
-      res.render("home", {"posts" : posts});
+    content.article.find({frontpageStatus : {$gte : 0} }).sort("frontpageStatus").limit(10).populate('imageId').exec(function (err, article) {
+        res.render("home", {"posts" : posts, "articles" : article});
+    }); 
   });
 
   
