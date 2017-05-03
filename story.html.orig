@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+    <title>Your Articles</title>
+    <style>
+      .log input {
+        display: none;
+      }
+
+    </style>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/starter-template.css" rel="stylesheet">
+            <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script src="https://use.fontawesome.com/63edd0bcb2.js"></script>
+
+  </head>
+
+  <body>
+
+   <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="article-home.html">Home</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+                    <form class="navbar-form navbar-right">
+            
+            <a class="deg" href="admin_blogs.html"><i class="fa fa-tachometer fa-2x" aria-hidden="true"></i></a>
+          </form>
+          <form class="navbar-form navbar-right">
+            
+            <a class="deg" href="members.html"><i class="fa fa-users fa-2x" aria-hidden="true"></i></a>
+          </form>
+                    <form class="navbar-form navbar-right">
+            
+            <a class="deg" href="login.html"><i class="fa fa-key fa-2x" aria-hidden="true"></i></a>
+          </form>
+        </div><!--/.nav-collapse -->
+
+          
+      </div>
+    </nav>
+            <div class="container">
+      <a href="admin_stories.html"><div class="pull-right closebtn">Close <i class="fa fa-times fa-2x" aria-hidden="true"></i></div></a>
+      </div>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Articles - Admin Dash</h1>
+<<<<<<< HEAD
+        <button onclick="go()" class="btn btn-default"> Test </button>
+        <p class="lead">Use this page to submit a new articles.
+      </div>
+      <div style="background-color: white; min-width: 500px; width: 65%; max-width: 750px; margin-left: auto; margin-right: auto;">
+	      <div id="editor">
+ 
+        </div>
+        <div id="log">
+
+        </div>
+=======
+        <p class="lead">Use this page to submit a new article.
+      </div>
+          <div class="center-every"> <label for="post-title" class="center-text post-title-label"> Article Title </label>
+            <input style="padding-left: 5px;" id="post-title" type="text" hint="SDF">       
+          </div>
+            <div class="clearfix">
+                <button type="button" class="pictureins btn btn-default pull-left">
+          Insert Picture <i class="fa fa-picture-o" aria-hidden="true"></i>
+         </button>
+         </div>
+      <div class="" style="background-color: white;">
+	      <div id="editor">
+ 
+      </div>
+      <button type="button" class="btn btn-success hoveringy pull-left">Save Draft <i class="fa fa-file-archive-o" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-success hoveringy pull-left">Post <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+>>>>>>> d444b8b9dd029f1798cb331093efb2d5b8de381b
+
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+    <script> 
+      function post () {
+       document.getElementById("log").innerHTML = document.getElementById("editor").innerHTML;
+        $("#log").find("input").css("display", "none");
+      }
+
+    </script>
+
+<!-- Initialize Quill editor -->
+<script>
+var toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  ['blockquote', 'code-block'],
+  ['link', 'image'],
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],            // text direction
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']                                         // remove formatting button
+];
+
+  var editor = new Quill('#editor', {
+    modules: { toolbar: toolbarOptions },
+    theme: 'snow'
+  });
+</script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    
+  </body>
+</html>
