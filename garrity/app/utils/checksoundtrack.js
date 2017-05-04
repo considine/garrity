@@ -1,6 +1,6 @@
 var request = require('request');
-
-
+var mongoose = require('mongoose');	
+var Podcast = require('../../models/podcast.js')
 function Checker (link, res) {
 
 		console.log(link);
@@ -10,11 +10,18 @@ function Checker (link, res) {
 			url, 
 			function (err, resp, body) {
 				if (!err && resp.statusCode==200) {
-					console.log(res);
+					var podcast = JSON.parse(body);
+					podcast._id = url
 					var html = JSON.parse(body).html
 					html =html.replace(/ height=\".*?\" /, ' height="100" ')
 					html = html.replace(/ width=\".*?\" /, ' style="width: 85%; min-width: 350px" ');
-					res.send({html : html})
+					podcast.html = html;
+					new Podcast(podcast).save(function (err) {
+						if (err) res.status(500).send({err : err});
+						else 
+							res.send({"success" : html});
+					});
+
 					// console.log(html);
 				}
 				else {

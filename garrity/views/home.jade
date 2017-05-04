@@ -3,6 +3,7 @@ extends layout
 block stylesheets
   
   link(href="/stylesheets/home.css" rel="stylesheet" type="text/css")
+  link(href="/stylesheets/soundcloud.css" rel="stylesheet" type="text/css")
   link(href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
   script(src="https://use.fontawesome.com/63edd0bcb2.js")  
 
@@ -41,47 +42,55 @@ block content
           a(href="/story/#{articles[2]._id}")   
             div(class="col-sm-12 col-xs-6 nested-content-col main-content-2 content-holder secondary-content  c#{articles[2]._id}" )
               h3.content-header  #{articles[2].title}
-    .secondary-content-header
-      h2 OTHER CONTENT
-    .row.bottom-content
-      .secondary-posts.col-sm-8.col-xs-12(style="padding: 0;  padding-right: 16px;")
-        .content-post.row(style=" padding: 12px")
-          .col-sm-3.col-xs-0
-            img(style="width: 100%; max-width: 300px", src="images/test4.jpeg")
-          .col-sm-9.col-xs-12
-            h3.post-header(style="margin-top: 8px; margin-bottom: 8px;") Everything you need to know about the Final Four
-            p.post-credentials(style="font-style: italic;") By Mike Rutheford March 28, 2017, 12:00pm EDT
-            p.post-hint The three types of tight ends as defined by Bill O'Brien and the Texans : Y, F, U.
-        .content-post.row(style=" padding: 12px")
-          .col-sm-3.col-xs-0
-            img(style="width: 100%; max-width: 300px", src="images/test4.jpeg")
-          .col-sm-9.col-xs-12
-            h3.post-header(style="margin-top: 8px; margin-bottom: 8px;") Everything you need to know about the Final Four
-            p.post-credentials(style="font-style: italic;") By Mike Rutheford March 28, 2017, 12:00pm EDT
-            p.post-hint The three types of tight ends as defined by Bill O'Brien and the Texans : Y, F, U.
-      .secondary-posts.col-sm-4.col-xs-12(style="padding-top: 16px; padding-left: 16px; text-align: center;")
-        .panel.panel-primary(style="max-width: 300px; margin-left: auto; margin-right: auto;")
-          .panel-heading
-            h3.panel-title Upcoming Fights
-          ul.list-group
-            li.list-group-item Cras Justo Odio
-            li.list-group-item Cras Justo Odio
-            li.list-group-item Cras Justo Odio
-            li.list-group-item Cras Justo Odio
-            li.list-group-item Cras Justo Odio
-    //- .secondary-content-header.col-xs-0
-    //-   h2.col-xs-0 WATCH 
-    //- .row.video-gallery
-    //-   .col-sm-3.col-xs-0.video-holder
-    //-     img(style="width: 100%;", src="https://img.youtube.com/vi/JeozbHfX_tw/0.jpg")
-    //-   .col-sm-3.col-xs-0.video-holder
-    //-     img(style="width: 100%;", src="https://img.youtube.com/vi/onai-Fw5RZY/0.jpg")
-    //-   .col-sm-3.col-xs-0.video-holder
-    //-     img(style="width: 100%;", src="https://img.youtube.com/vi/mPtux9fl_mg/0.jpg")
-    //-   .col-sm-3.col-xs-0.video-holder
-    //-     img(style="width: 100%;", src="https://img.youtube.com/vi/JeozbHfX_tw/0.jpg")
-  .sound-cloud-holder(style = "text-align: center;")
-    iframe(width="80%" height="100"  style="min-width: 350px;" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/319182695&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true")
+  //-   .secondary-content-header
+  //-     h2 OTHER CONTENT
+  //-   .row.bottom-content
+  //-     .secondary-posts.col-sm-8.col-xs-12(style="padding: 0;  padding-right: 16px;")
+  //-       .content-post.row(style=" padding: 12px")
+  //-         .col-sm-3.col-xs-0
+  //-           img(style="width: 100%; max-width: 300px", src="images/test4.jpeg")
+  //-         .col-sm-9.col-xs-12
+  //-           h3.post-header(style="margin-top: 8px; margin-bottom: 8px;") Everything you need to know about the Final Four
+  //-           p.post-credentials(style="font-style: italic;") By Mike Rutheford March 28, 2017, 12:00pm EDT
+  //-           p.post-hint The three types of tight ends as defined by Bill O'Brien and the Texans : Y, F, U.
+  //-       .content-post.row(style=" padding: 12px")
+  //-         .col-sm-3.col-xs-0
+  //-           img(style="width: 100%; max-width: 300px", src="images/test4.jpeg")
+  //-         .col-sm-9.col-xs-12
+  //-           h3.post-header(style="margin-top: 8px; margin-bottom: 8px;") Everything you need to know about the Final Four
+  //-           p.post-credentials(style="font-style: italic;") By Mike Rutheford March 28, 2017, 12:00pm EDT
+  //-           p.post-hint The three types of tight ends as defined by Bill O'Brien and the Texans : Y, F, U.
+  //-     .secondary-posts.col-sm-4.col-xs-12(style="padding-top: 16px; padding-left: 16px; text-align: center;")
+  //-       .panel.panel-primary(style="max-width: 300px; margin-left: auto; margin-right: auto;")
+  //-         .panel-heading
+  //-           h3.panel-title Upcoming Fights
+  //-         ul.list-group
+  //-           li.list-group-item Cras Justo Odio
+  //-           li.list-group-item Cras Justo Odio
+  //-           li.list-group-item Cras Justo Odio
+  //-           li.list-group-item Cras Justo Odio
+  //-           li.list-group-item Cras Justo Odio
+  //-   //- .secondary-content-header.col-xs-0
+  //-   //-   h2.col-xs-0 WATCH 
+  //-   //- .row.video-gallery
+  //-   //-   .col-sm-3.col-xs-0.video-holder
+  //-   //-     img(style="width: 100%;", src="https://img.youtube.com/vi/JeozbHfX_tw/0.jpg")
+  //-   //-   .col-sm-3.col-xs-0.video-holder
+  //-   //-     img(style="width: 100%;", src="https://img.youtube.com/vi/onai-Fw5RZY/0.jpg")
+  //-   //-   .col-sm-3.col-xs-0.video-holder
+  //-   //-     img(style="width: 100%;", src="https://img.youtube.com/vi/mPtux9fl_mg/0.jpg")
+  //-   //-   .col-sm-3.col-xs-0.video-holder
+  //-   //-     img(style="width: 100%;", src="https://img.youtube.com/vi/JeozbHfX_tw/0.jpg")
+  //- .sound-cloud-holder(style = "text-align: center;")
+  //-   iframe(width="80%" height="100"  style="min-width: 350px;" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/319182695&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true")
+  .podcast-header-wrapper
+    h2.podcast-header TL;DR Podcasts
+    p Send Feedback!
+  .podcast-widget-wrapper
+    .all-podcasts
+        each podcast in p
+         .podcast-holder!= podcast.html
+            img#loadgif(src="http://www.arabianbusiness.com/skins/ab.main/gfx/loading_spinner.gif")
   footer
     .col-sm-8.col-xs-12.text-left
       span.copyright Copyright &copy; 

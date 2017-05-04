@@ -12,3 +12,14 @@ body {
 	  padding-top: 40px;
     height: 100%;
 }
+
+.podcast-header-wrapper {
+	padding-top: 24px;
+	h2.podcast-header {
+		text-align: center;
+		color: lighten(black, 20%);
+	}
+	p {
+		text-align:  center;
+	}
+}

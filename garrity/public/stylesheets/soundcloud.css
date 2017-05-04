@@ -1,0 +1,37 @@
+.podcast-widget-wrapper .soundcloud-panel-header-container {
+  text-align: center; }
+  .podcast-widget-wrapper .soundcloud-panel-header-container h3 {
+    font-size: 20px;
+    color: #4d4d4d; }
+.podcast-widget-wrapper .form-wrapper {
+  overflow: auto; }
+  .podcast-widget-wrapper .form-wrapper form {
+    text-align: center; }
+    .podcast-widget-wrapper .form-wrapper form button {
+      color: #fc892b; }
+    .podcast-widget-wrapper .form-wrapper form img {
+      height: 20px; }
+.podcast-widget-wrapper #error-alert {
+  display: none;
+  width: 50%;
+  max-width: 400px;
+  min-width: 100px;
+  margin-right: auto;
+  margin-left: auto; }
+.podcast-widget-wrapper .podcast-holder {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto; }
+  .podcast-widget-wrapper .podcast-holder #loadgif {
+    position: absolute;
+    height: 100px;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0; }
+  .podcast-widget-wrapper .podcast-holder iframe {
+    z-index: 5;
+    position: relative; }
+
+/*# sourceMappingURL=soundcloud.css.map */

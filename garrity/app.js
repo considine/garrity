@@ -8,7 +8,6 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var crypto = require ('crypto');
 var content  = require('./models/blog-post');
-
 var mime = require ('mime');
 var mongoose = require('mongoose');
 var passwordChecker = require("./app/utils/getpassword");
@@ -17,11 +16,12 @@ var styler = require('./app/utils/styler');
 var app = express();
 var session =  require('express-session');
 var adminLogin = require('./models/admin-login');
+var podcast = require('./models/podcast');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-// app.use(logger('dev'));
+
+
+
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -37,9 +37,15 @@ app.get('/home', function (req, res) {
   content.blog.find({"published" : true}).populate('imageId').sort({'time': -1}).limit(5).exec(function (err, posts) {
     if (err) res.send(500, err);
     content.article.find({frontpageStatus : {$gte : 0} }).sort("frontpageStatus").limit(10).populate('imageId').exec(function (err, article) {
-        res.render("home", {"posts" : posts, "articles" : article});
+       if (err) res.send(500, err);
+       podcast.find({}, function (err, podcast) {
+           if (err) res.send(500, err);
+          res.render("home", {"posts" : posts, "articles" : article, p : podcast});
+       });
+       
     }); 
   });
+
 
   
 });
@@ -169,7 +175,7 @@ app.use(function(req, res, next) {
 });
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+  // set locales, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
@@ -177,7 +183,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-app.listen(8000, function () {
+app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
 module.exports = app;

@@ -1,0 +1,26 @@
+extends ../layout
+
+block stylesheets
+  link(href="/stylesheets/soundcloud.css" rel="stylesheet" type="text/css")
+block content
+  .podcast-widget-wrapper
+    .soundcloud-panel-header-container
+      h3.soundcloud-panel-header Add New Soundcloud Track:
+      p  These will appear on your front page, most recent first 
+    .form-wrapper
+      form.navbar-form(role='search')
+        .form-group
+          input.form-control#sc-url(type='text', placeholder='Enter URL here:')
+        button.btn.btn-default#add-track(type='button')
+          img(src='/images/soundcloud.svg')
+    .all-podcasts
+      each podcast in p
+       .podcast-holder!= podcast.html
+          img#loadgif(src="http://www.arabianbusiness.com/skins/ab.main/gfx/loading_spinner.gif")
+      .alert.alert-danger#error-alert.alert-dismissible(role='alert')
+        button.close(type='button', data-dismiss='alert', aria-label='Close')
+          span(aria-hidden='true') ×
+        
+        |  Bad URL. Please make sure to use the one that links directly to the podcast post, ie https://soundcloud.com/4fthui9fza7z/monday-morning-cornerman-episode-1-championship-triple-header-shakur-pro-debut-porter-berto
+block scripts
+  script(src="/javascripts/addsoundcloud.js")

@@ -8,6 +8,7 @@ var multer = require('multer');
 var blogmailer = require('../app/utils/send-mail');
 var imageRender = require('../app/utils/dimensconfig');
 var configModel = require('../models/imageconfig');
+var podcast = require('../models/podcast');
 var soundCloudChecker = require('../app/utils/checksoundtrack');
 var storyContent = "story";
 var blogContent = "blog";
@@ -397,9 +398,14 @@ router.get('/edit-'+ pageContent +'/:id', function(req, res) {
 
 
 
+router.get('/soundcloud', function (req, res) {
+  podcast.find({}, function (err, podcasts) {
+    res.render('admin/soundcloud', {p : podcasts});
+  });
+  
+});
 router.post('/soundcloud', function (req, res) {
-  var url = req.body.url;
-  soundCloudChecker(url, res);
+  soundCloudChecker(req.body.url, res);
 });
 
 
